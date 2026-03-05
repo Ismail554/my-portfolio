@@ -411,19 +411,30 @@ const Education = ({ id, isVisible }) => {
 const Footer = () => {
   return (
     <footer className="footer">
+      <div className="footer-pattern"></div>
       <div className="container">
         <div className="footer-content">
-          <p>© 2025 MD Ismail Hosen. All rights reserved.</p>
-          <div className="footer-links">
-            <a href="https://linkedin.com/in/ismail554" target="_blank" rel="noopener noreferrer">
-              <i className="fab fa-linkedin"></i>
-            </a>
-            <a href="https://github.com/Ismail554" target="_blank" rel="noopener noreferrer">
-              <i className="fab fa-github"></i>
-            </a>
-            <a href="mailto:ismailshuvo555@gmail.com">
-              <i className="fas fa-envelope"></i>
-            </a>
+          <div className="footer-top">
+            <div className="footer-brand">
+              <span className="footer-logo">MH</span>
+              <p className="footer-tagline">Building cross-platform mobile applications with Flutter.</p>
+            </div>
+            <div className="footer-links">
+              <a href="https://linkedin.com/in/ismail554" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+                <i className="fab fa-linkedin"></i>
+              </a>
+              <a href="https://github.com/Ismail554" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
+                <i className="fab fa-github"></i>
+              </a>
+              <a href="mailto:ismailshuvo555@gmail.com" aria-label="Email">
+                <i className="fas fa-envelope"></i>
+              </a>
+            </div>
+          </div>
+          <div className="footer-divider"></div>
+          <div className="footer-bottom">
+            <p>© {new Date().getFullYear()} MD Ismail Hosen. All rights reserved.</p>
+            <p className="footer-made-with">Made with <span className="heart">❤️</span> & React</p>
           </div>
         </div>
       </div>
