@@ -62,6 +62,9 @@ function App() {
   return (
     <div className="App">
       <div className="cursor-glow"></div>
+      <div className="orb orb-1"></div>
+      <div className="orb orb-2"></div>
+      <div className="orb orb-3"></div>
       <Navbar scrollToSection={scrollToSection} isDarkMode={isDarkMode} toggleTheme={toggleTheme} />
       <Hero />
       <Summary id="summary" />
@@ -87,7 +90,12 @@ const Navbar = ({ scrollToSection, isDarkMode, toggleTheme }) => {
   }, []);
 
   return (
-    <nav className={`navbar ${scrolled ? 'navbar-scrolled' : ''}`}>
+    <motion.nav
+      className={`navbar ${scrolled ? 'navbar-scrolled' : ''}`}
+      initial={{ y: -100 }}
+      animate={{ y: 0 }}
+      transition={{ duration: 0.5, ease: "easeOut" }}
+    >
       <div className="nav-container">
         <div className="nav-logo">MH</div>
         <button className="mobile-menu-btn" onClick={() => setIsMenuOpen(!isMenuOpen)}>
@@ -115,7 +123,7 @@ const Navbar = ({ scrollToSection, isDarkMode, toggleTheme }) => {
           </li>
         </ul>
       </div>
-    </nav>
+    </motion.nav>
   );
 };
 
