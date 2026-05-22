@@ -179,6 +179,16 @@ const Hero = () => {
             <span className="tech-badge store">App Store</span>
           </motion.div>
           <motion.div
+            className="hero-highlights"
+            initial={{ y: 20, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            transition={{ duration: 0.5, delay: 0.58 }}
+          >
+            <span><i className="fas fa-rocket"></i> Production-ready shipping</span>
+            <span><i className="fas fa-bolt"></i> 90fps UI performance</span>
+            <span><i className="fas fa-diagram-project"></i> Clean Architecture</span>
+          </motion.div>
+          <motion.div
             className="hero-contact"
             initial={{ y: 20, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
@@ -220,8 +230,19 @@ const Hero = () => {
           animate={{ x: 0, opacity: 1 }}
           transition={{ duration: 0.6, delay: 0.4 }}
         >
-          <div className="profile-image-container">
-            <img src={profilePic} alt="MD Ismail Hosen" className="profile-photo" />
+          <div className="hero-image-stack">
+            <div className="flutter-emblem" aria-hidden="true">
+              <span className="flutter-shape flutter-shape-a"></span>
+              <span className="flutter-shape flutter-shape-b"></span>
+              <span className="flutter-shape flutter-shape-c"></span>
+            </div>
+            <div className="profile-image-container">
+              <img src={profilePic} alt="MD Ismail Hosen" className="profile-photo" />
+            </div>
+            <div className="store-pills">
+              <span><i className="fab fa-google-play"></i> Google Play</span>
+              <span><i className="fab fa-app-store"></i> App Store</span>
+            </div>
           </div>
         </motion.div>
       </div>
@@ -311,7 +332,7 @@ const Skills = ({ id }) => {
             </div>
           </motion.div>
           <motion.div className="skill-category" variants={itemVariants}>
-            <h3><i className="fas fa-language"></i> Languages</h3>
+            <h3><i className="fas fa-language"></i> Spoken Languages</h3>
             <div className="skill-tags">
               {skills.languagesSpoken.map(skill => <span key={skill} className="skill-tag">{skill}</span>)}
             </div>
@@ -588,7 +609,7 @@ const Footer = () => {
               <a href="https://github.com/Ismail554" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
                 <i className="fab fa-github"></i>
               </a>
-              <a href="mailto:ismailshuvo555@gmail.com" aria-label="Email">
+              <a href="mailto:mdismail.cse59@gmail.com" aria-label="Email">
                 <i className="fas fa-envelope"></i>
               </a>
             </div>
