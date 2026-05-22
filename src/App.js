@@ -165,6 +165,20 @@ const Hero = () => {
             Architecting and shipping cross-platform applications to App Store & Google Play
           </motion.p>
           <motion.div
+            className="tech-stack"
+            initial={{ y: 20, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            transition={{ duration: 0.5, delay: 0.55 }}
+          >
+            <span className="tech-badge flutter">Flutter</span>
+            <span className="tech-badge dart">Dart</span>
+            <span className="tech-badge firebase">Firebase</span>
+            <span className="tech-badge android">Android</span>
+            <span className="tech-badge ios">iOS</span>
+            <span className="tech-badge play">Google Play</span>
+            <span className="tech-badge store">App Store</span>
+          </motion.div>
+          <motion.div
             className="hero-contact"
             initial={{ y: 20, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
@@ -267,37 +281,37 @@ const Skills = ({ id }) => {
         <h2 className="section-title">Technical Skills</h2>
         <div className="skills-grid">
           <motion.div className="skill-category" variants={itemVariants}>
-            <h3>Languages</h3>
+            <h3><i className="fas fa-code"></i> Languages</h3>
             <div className="skill-tags">
               {skills.languages.map(skill => <span key={skill} className="skill-tag">{skill}</span>)}
             </div>
           </motion.div>
           <motion.div className="skill-category" variants={itemVariants}>
-            <h3>Mobile Frameworks</h3>
+            <h3><i className="fas fa-mobile-alt"></i> Mobile Frameworks</h3>
             <div className="skill-tags">
               {skills.frameworks.map(skill => <span key={skill} className="skill-tag">{skill}</span>)}
             </div>
           </motion.div>
           <motion.div className="skill-category" variants={itemVariants}>
-            <h3>Architecture</h3>
+            <h3><i className="fas fa-layer-group"></i> Architecture</h3>
             <div className="skill-tags">
               {skills.architecture.map(skill => <span key={skill} className="skill-tag">{skill}</span>)}
             </div>
           </motion.div>
           <motion.div className="skill-category" variants={itemVariants}>
-            <h3>Backend & Services</h3>
+            <h3><i className="fas fa-server"></i> Backend & Services</h3>
             <div className="skill-tags">
               {skills.backendServices.map(skill => <span key={skill} className="skill-tag">{skill}</span>)}
             </div>
           </motion.div>
           <motion.div className="skill-category" variants={itemVariants}>
-            <h3>Tools & Platforms</h3>
+            <h3><i className="fas fa-tools"></i> Tools & Platforms</h3>
             <div className="skill-tags">
               {skills.tools.map(skill => <span key={skill} className="skill-tag">{skill}</span>)}
             </div>
           </motion.div>
           <motion.div className="skill-category" variants={itemVariants}>
-            <h3>Languages</h3>
+            <h3><i className="fas fa-language"></i> Languages</h3>
             <div className="skill-tags">
               {skills.languagesSpoken.map(skill => <span key={skill} className="skill-tag">{skill}</span>)}
             </div>
@@ -393,8 +407,10 @@ const Projects = ({ id }) => {
         'Implemented 6-language localization and handled 100+ concurrent data updates per second via WebSocket streams without UI lag.',
         'Published cross-platform to both stores, achieving 4.8 average rating.'
       ],
-      link: 'https://play.google.com/store/apps/details?id=com.scorelivepro.app',
-      linkText: 'Google Play'
+      links: [
+        { url: 'https://play.google.com/store/apps/details?id=com.scorelivepro.app', icon: 'fab fa-google-play', label: 'Google Play' },
+        { url: 'https://apps.apple.com/app/scorelivepro/id6758834768', icon: 'fab fa-app-store', label: 'App Store' }
+      ]
     },
     {
       name: 'Geography Geyser',
@@ -404,8 +420,10 @@ const Projects = ({ id }) => {
         'Transitioned the application from closed testing to production, shipping to 2,000+ users across Google Play and the App Store.',
         'Engineered offline-first caching, which reduced bounce rates by 15%, and managed the end-to-end release pipeline.'
       ],
-      link: 'https://play.google.com/store/apps/details?id=com.geographygeyser.simon',
-      linkText: 'Google Play'
+      links: [
+        { url: 'https://play.google.com/store/apps/details?id=com.geographygeyser.simon', icon: 'fab fa-google-play', label: 'Google Play' },
+        { url: 'https://apps.apple.com/app/geography-geyser/id6760274426', icon: 'fab fa-app-store', label: 'App Store' }
+      ]
     },
     {
       name: 'NetworkX Mobile App',
@@ -414,8 +432,9 @@ const Projects = ({ id }) => {
       points: [
         'Built an enterprise mobile app with API-driven dashboards; engineered the network layer with automatic token refresh for seamless authentication.'
       ],
-      link: 'https://play.google.com/store/apps/details?id=com.app.neworkx',
-      linkText: 'Google Play'
+      links: [
+        { url: 'https://play.google.com/store/apps/details?id=com.app.neworkx', icon: 'fab fa-google-play', label: 'Google Play' }
+      ]
     },
     {
       name: 'AnchorUP',
@@ -425,8 +444,9 @@ const Projects = ({ id }) => {
         'Architected a scalable Flutter social networking application with a reusable modular widget library, accelerating feature development by 30%.',
         'Integrated the Agora SDK for seamless real-time video calling and embedded an interactive AI bot to drive user engagement and communication.'
       ],
-      link: 'https://github.com/Ismail554/AnchorApp',
-      linkText: 'GitHub'
+      links: [
+        { url: 'https://github.com/Ismail554/AnchorApp', icon: 'fab fa-github', label: 'GitHub' }
+      ]
     },
     {
       name: 'Reflections (My Notes App)',
@@ -435,8 +455,9 @@ const Projects = ({ id }) => {
       points: [
         'Built a note-taking app using Clean Architecture with GetX and GoRouter; integrated Firebase persistence using the repository pattern.'
       ],
-      link: 'https://github.com/Ismail554/my_note_app_reflections',
-      linkText: 'GitHub'
+      links: [
+        { url: 'https://github.com/Ismail554/my_note_app_reflections', icon: 'fab fa-github', label: 'GitHub' }
+      ]
     },
     {
       name: 'SwissCarExchange',
@@ -447,8 +468,9 @@ const Projects = ({ id }) => {
         'Implemented Provider for state management, GoRouter for declarative navigation, and REST API integration throughout.',
         'Delivered cross-platform for both iOS and Android with Clean Architecture from data layer to presentation.'
       ],
-      link: 'https://github.com/Ismail554/SwissCarExchange',
-      linkText: 'GitHub'
+      links: [
+        { url: 'https://github.com/Ismail554/SwissCarExchange', icon: 'fab fa-github', label: 'GitHub' }
+      ]
     }
   ];
 
@@ -476,9 +498,13 @@ const Projects = ({ id }) => {
                   <li key={idx}>{point}</li>
                 ))}
               </ul>
-              <a href={project.link} target="_blank" rel="noopener noreferrer" className="project-link">
-                View on {project.linkText} →
-              </a>
+              <div className="project-links">
+                {project.links.map((link, idx) => (
+                  <a key={idx} href={link.url} target="_blank" rel="noopener noreferrer" className="project-link">
+                    <i className={link.icon}></i> {link.label}
+                  </a>
+                ))}
+              </div>
             </motion.div>
           ))}
         </div>
