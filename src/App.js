@@ -22,6 +22,25 @@ const itemVariants = {
   }
 };
 
+const skillCategoryVariants = {
+  hidden: { opacity: 0, y: 20 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.5, ease: 'easeOut', staggerChildren: 0.05, delayChildren: 0.08 }
+  }
+};
+
+const skillTagVariants = {
+  hidden: { opacity: 0, y: 10, scale: 0.96 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    scale: 1,
+    transition: { duration: 0.28, ease: 'easeOut' }
+  }
+};
+
 function App() {
   const [isDarkMode, setIsDarkMode] = useState(() => {
     const savedTheme = localStorage.getItem('theme');
@@ -239,10 +258,6 @@ const Hero = () => {
             <div className="profile-image-container">
               <img src={profilePic} alt="MD Ismail Hosen" className="profile-photo" />
             </div>
-            <div className="store-pills">
-              <span><i className="fab fa-google-play"></i> Google Play</span>
-              <span><i className="fab fa-app-store"></i> App Store</span>
-            </div>
           </div>
         </motion.div>
       </div>
@@ -289,6 +304,53 @@ const Skills = ({ id }) => {
     languagesSpoken: ['Bengali (Native)', 'English (Professional Working)']
   };
 
+  const iconImageMap = {
+    Flutter: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/flutter/flutter-original.svg',
+    Dart: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/dart/dart-original.svg',
+    Java: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg',
+    Python: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg',
+    Git: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg',
+    'VS Code': 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vscode/vscode-original.svg',
+    'Android Studio': 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/androidstudio/androidstudio-original.svg',
+    Xcode: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/xcode/xcode-original.svg',
+    'Firebase (Auth, Firestore, Storage)': 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/firebase/firebase-plain.svg'
+  };
+
+  const iconClassMap = {
+    'C / C++': 'fas fa-file-code',
+    GitHub: 'fab fa-github',
+    'Android SDK': 'fab fa-android',
+    Provider: 'fas fa-cubes',
+    GetX: 'fas fa-bolt',
+    GoRouter: 'fas fa-route',
+    'Clean Architecture': 'fas fa-sitemap',
+    MVVM: 'fas fa-layer-group',
+    'REST API Integration': 'fas fa-plug',
+    WebSockets: 'fas fa-wifi',
+    'Firebase (Auth, Firestore, Storage)': 'fas fa-fire',
+    'Agora SDK': 'fas fa-video',
+    'Stripe SDK': 'fas fa-credit-card',
+    'Google Maps SDK': 'fas fa-map-location-dot',
+    Postman: 'fas fa-paper-plane',
+    'Google Play Console': 'fab fa-google-play',
+    'App Store Connect': 'fab fa-app-store-ios',
+    'Bengali (Native)': 'fas fa-comment-dots',
+    'English (Professional Working)': 'fas fa-language'
+  };
+
+  const renderSkillTag = (skill) => {
+    const iconImage = iconImageMap[skill];
+    const iconClass = iconClassMap[skill];
+
+    return (
+      <motion.span key={skill} className="skill-tag" variants={skillTagVariants}>
+        {iconImage && <img src={iconImage} alt="" className="skill-tag-icon-img" loading="lazy" />}
+        {!iconImage && iconClass && <i className={`${iconClass} skill-tag-icon`}></i>}
+        {skill}
+      </motion.span>
+    );
+  };
+
   return (
     <motion.section
       id={id}
@@ -301,41 +363,41 @@ const Skills = ({ id }) => {
       <div className="container">
         <h2 className="section-title">Technical Skills</h2>
         <div className="skills-grid">
-          <motion.div className="skill-category" variants={itemVariants}>
+          <motion.div className="skill-category skills-languages" variants={skillCategoryVariants}>
             <h3><i className="fas fa-code"></i> Languages</h3>
-            <div className="skill-tags">
-              {skills.languages.map(skill => <span key={skill} className="skill-tag">{skill}</span>)}
-            </div>
+            <motion.div className="skill-tags" variants={skillCategoryVariants}>
+              {skills.languages.map(renderSkillTag)}
+            </motion.div>
           </motion.div>
-          <motion.div className="skill-category" variants={itemVariants}>
+          <motion.div className="skill-category skills-mobile" variants={skillCategoryVariants}>
             <h3><i className="fas fa-mobile-alt"></i> Mobile Frameworks</h3>
-            <div className="skill-tags">
-              {skills.frameworks.map(skill => <span key={skill} className="skill-tag">{skill}</span>)}
-            </div>
+            <motion.div className="skill-tags" variants={skillCategoryVariants}>
+              {skills.frameworks.map(renderSkillTag)}
+            </motion.div>
           </motion.div>
-          <motion.div className="skill-category" variants={itemVariants}>
+          <motion.div className="skill-category skills-architecture" variants={skillCategoryVariants}>
             <h3><i className="fas fa-layer-group"></i> Architecture</h3>
-            <div className="skill-tags">
-              {skills.architecture.map(skill => <span key={skill} className="skill-tag">{skill}</span>)}
-            </div>
+            <motion.div className="skill-tags" variants={skillCategoryVariants}>
+              {skills.architecture.map(renderSkillTag)}
+            </motion.div>
           </motion.div>
-          <motion.div className="skill-category" variants={itemVariants}>
+          <motion.div className="skill-category skills-backend" variants={skillCategoryVariants}>
             <h3><i className="fas fa-server"></i> Backend & Services</h3>
-            <div className="skill-tags">
-              {skills.backendServices.map(skill => <span key={skill} className="skill-tag">{skill}</span>)}
-            </div>
+            <motion.div className="skill-tags" variants={skillCategoryVariants}>
+              {skills.backendServices.map(renderSkillTag)}
+            </motion.div>
           </motion.div>
-          <motion.div className="skill-category" variants={itemVariants}>
+          <motion.div className="skill-category skills-tools" variants={skillCategoryVariants}>
             <h3><i className="fas fa-tools"></i> Tools & Platforms</h3>
-            <div className="skill-tags">
-              {skills.tools.map(skill => <span key={skill} className="skill-tag">{skill}</span>)}
-            </div>
+            <motion.div className="skill-tags" variants={skillCategoryVariants}>
+              {skills.tools.map(renderSkillTag)}
+            </motion.div>
           </motion.div>
-          <motion.div className="skill-category" variants={itemVariants}>
+          <motion.div className="skill-category skills-spoken" variants={skillCategoryVariants}>
             <h3><i className="fas fa-language"></i> Spoken Languages</h3>
-            <div className="skill-tags">
-              {skills.languagesSpoken.map(skill => <span key={skill} className="skill-tag">{skill}</span>)}
-            </div>
+            <motion.div className="skill-tags" variants={skillCategoryVariants}>
+              {skills.languagesSpoken.map(renderSkillTag)}
+            </motion.div>
           </motion.div>
         </div>
       </div>
