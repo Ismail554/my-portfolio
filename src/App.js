@@ -49,6 +49,8 @@ function App() {
     }
     return window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
   });
+  const [activeSection, setActiveSection] = useState('');
+  const [scrollProgress, setScrollProgress] = useState(0);
 
   useEffect(() => {
     if (isDarkMode) {
@@ -74,17 +76,62 @@ function App() {
     return () => window.removeEventListener('mousemove', handleMouseMove);
   }, []);
 
+  useEffect(() => {
+    const handleScroll = () => {
+      const totalScroll = document.documentElement.scrollHeight - window.innerHeight;
+      if (totalScroll > 0) {
+        const currentProgress = (window.scrollY / totalScroll) * 100;
+        setScrollProgress(currentProgress);
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  useEffect(() => {
+    const sections = ['summary', 'skills', 'experience', 'projects', 'education'];
+    const observerOptions = {
+      root: null,
+      rootMargin: '-40% 0px -40% 0px',
+      threshold: 0
+    };
+
+    const observerCallback = (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          setActiveSection(entry.target.id);
+        }
+      });
+    };
+
+    const observer = new IntersectionObserver(observerCallback, observerOptions);
+
+    sections.forEach((id) => {
+      const el = document.getElementById(id);
+      if (el) observer.observe(el);
+    });
+
+    return () => {
+      sections.forEach((id) => {
+        const el = document.getElementById(id);
+        if (el) observer.unobserve(el);
+      });
+    };
+  }, []);
+
   const scrollToSection = (sectionId) => {
     document.getElementById(sectionId).scrollIntoView({ behavior: 'smooth' });
   };
 
   return (
     <div className="App">
+      <div className="scroll-progress-bar" style={{ width: `${scrollProgress}%` }}></div>
       <div className="cursor-glow"></div>
       <div className="orb orb-1"></div>
       <div className="orb orb-2"></div>
       <div className="orb orb-3"></div>
-      <Navbar scrollToSection={scrollToSection} isDarkMode={isDarkMode} toggleTheme={toggleTheme} />
+      <Navbar scrollToSection={scrollToSection} isDarkMode={isDarkMode} toggleTheme={toggleTheme} activeSection={activeSection} />
       <Hero />
       <Summary id="summary" />
       <Skills id="skills" />
@@ -96,7 +143,7 @@ function App() {
   );
 }
 
-const Navbar = ({ scrollToSection, isDarkMode, toggleTheme }) => {
+const Navbar = ({ scrollToSection, isDarkMode, toggleTheme, activeSection }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
 
@@ -108,6 +155,11 @@ const Navbar = ({ scrollToSection, isDarkMode, toggleTheme }) => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  const handleNavClick = (sectionId) => {
+    scrollToSection(sectionId);
+    setIsMenuOpen(false);
+  };
+
   return (
     <motion.nav
       className={`navbar ${scrolled ? 'navbar-scrolled' : ''}`}
@@ -116,16 +168,56 @@ const Navbar = ({ scrollToSection, isDarkMode, toggleTheme }) => {
       transition={{ duration: 0.5, ease: "easeOut" }}
     >
       <div className="nav-container">
-        <div className="nav-logo">MH</div>
-        <button className="mobile-menu-btn" onClick={() => setIsMenuOpen(!isMenuOpen)}>
+        <div className="nav-logo">MIH</div>
+        <button
+          className="mobile-menu-btn"
+          onClick={() => setIsMenuOpen(!isMenuOpen)}
+          aria-expanded={isMenuOpen}
+          aria-label="Toggle mobile navigation menu"
+        >
           ☰
         </button>
         <ul className={`nav-menu ${isMenuOpen ? 'active' : ''}`}>
-          <li><button onClick={() => scrollToSection('summary')}>Summary</button></li>
-          <li><button onClick={() => scrollToSection('skills')}>Skills</button></li>
-          <li><button onClick={() => scrollToSection('experience')}>Experience</button></li>
-          <li><button onClick={() => scrollToSection('projects')}>Projects</button></li>
-          <li><button onClick={() => scrollToSection('education')}>Education</button></li>
+          <li>
+            <button
+              className={activeSection === 'summary' ? 'active-nav-link' : ''}
+              onClick={() => handleNavClick('summary')}
+            >
+              Summary
+            </button>
+          </li>
+          <li>
+            <button
+              className={activeSection === 'skills' ? 'active-nav-link' : ''}
+              onClick={() => handleNavClick('skills')}
+            >
+              Skills
+            </button>
+          </li>
+          <li>
+            <button
+              className={activeSection === 'experience' ? 'active-nav-link' : ''}
+              onClick={() => handleNavClick('experience')}
+            >
+              Experience
+            </button>
+          </li>
+          <li>
+            <button
+              className={activeSection === 'projects' ? 'active-nav-link' : ''}
+              onClick={() => handleNavClick('projects')}
+            >
+              Projects
+            </button>
+          </li>
+          <li>
+            <button
+              className={activeSection === 'education' ? 'active-nav-link' : ''}
+              onClick={() => handleNavClick('education')}
+            >
+              Education
+            </button>
+          </li>
           <li>
             <button className="theme-toggle-btn" onClick={toggleTheme} aria-label="Toggle Dark Mode">
               {isDarkMode ? '☀️' : '🌙'}
@@ -191,7 +283,7 @@ const Hero = () => {
           >
             <span className="tech-badge flutter">Flutter</span>
             <span className="tech-badge dart">Dart</span>
-            <span className="tech-badge firebase">Firebase</span>
+            <span className="tech-badge Java">Java</span>
             <span className="tech-badge android">Android</span>
             <span className="tech-badge ios">iOS</span>
             <span className="tech-badge play">Google Play</span>
@@ -410,19 +502,19 @@ const Experience = ({ id }) => {
   const experiences = [
     {
       title: 'Junior Flutter Developer · Assistant Team Leader',
-      company: 'Join Venture AI',
+      company: 'Join Venture AI / Team AI-Moonkhights',
       location: 'Dhaka, Bangladesh',
       period: 'Sep 2025 — Present',
       points: [
         'Engineered cross-platform Flutter applications following Clean Architecture, reducing feature delivery time by ~25% through modular design.',
         'Optimized UI rendering pipelines, resolving jank on low-end devices and targeting 90fps to improve frame rate consistency by 20%.',
         'Integrated REST APIs, WebSockets, and third-party SDKs including Agora (video/audio) and Stripe (payments).',
-        'Led a team of 3 junior developers; conducted code reviews, technical mentorship, and reduced production hotfixes by 30%.'
+        'Led a team of 6 junior developers; conducted code reviews, technical mentorship, and reduced production hotfixes by 30%.'
       ]
     },
     {
       title: 'Lead Flutter Developer',
-      company: 'Freelance Mobile Developer / App_Oreo Team Lead',
+      company: 'Freelance Mobile Developer ',
       location: 'Dhaka, Bangladesh',
       period: 'Jan 2025 — Present',
       points: [
@@ -600,7 +692,7 @@ const Projects = ({ id }) => {
 const Education = ({ id }) => {
   const education = [
     {
-      degree: 'Bachelor of Science in Computer Science',
+      degree: 'BSc in Computer Science and Engineering',
       institution: 'Canadian University of Bangladesh',
       location: 'Dhaka, Bangladesh',
       period: '2025 — Present',
@@ -661,7 +753,7 @@ const Footer = () => {
         <div className="footer-content">
           <div className="footer-top">
             <div className="footer-brand">
-              <span className="footer-logo">MH</span>
+              <span className="footer-logo">ISM</span>
               <p className="footer-tagline">Building cross-platform mobile applications with Flutter.</p>
             </div>
             <div className="footer-links">
