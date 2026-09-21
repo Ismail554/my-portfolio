@@ -60,17 +60,14 @@ export const CaseStudyModal = ({ project, onClose }) => {
 
           {/* Modal Body */}
           <div className="modal-body">
-            {/* Screenshot Hero in Modal */}
+            {/* 16:9 Widescreen Screenshot Showcase */}
             {project.image && (
-              <div className="modal-image-showcase">
-                <div className="modal-device-frame">
-                  <div className="modal-device-notch"></div>
-                  <img
-                    src={project.image}
-                    alt={`${project.name} Application Screenshot`}
-                    className="modal-screen-img"
-                  />
-                </div>
+              <div className="modal-image-showcase-16-9">
+                <img
+                  src={project.image}
+                  alt={`${project.name} Application Screenshot`}
+                  className="modal-screen-img-16-9"
+                />
               </div>
             )}
 

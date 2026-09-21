@@ -1,46 +1,52 @@
 // src/components/FeaturedProjects.jsx
 import React, { useState } from 'react';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import { FEATURED_PROJECTS, OTHER_PROJECTS } from '../data/portfolioData';
 import { CaseStudyModal } from './CaseStudyModal';
 
 export const FeaturedProjects = () => {
   const [activeFilter, setActiveFilter] = useState('all');
   const [selectedCaseStudy, setSelectedCaseStudy] = useState(null);
+  const [expandedCards, setExpandedCards] = useState({});
+
+  const toggleExpand = (id) => {
+    setExpandedCards((prev) => ({
+      ...prev,
+      [id]: !prev[id]
+    }));
+  };
 
   const filters = [
     { id: 'all', label: 'All Projects', count: FEATURED_PROJECTS.length + OTHER_PROJECTS.length },
-    { id: 'live', label: 'Production / Stores', count: 5 },
+    { id: 'live', label: 'Production & Stores', count: 5 },
     { id: 'client', label: 'Client Solutions', count: 1 },
     { id: 'opensource', label: 'Architecture & OSS', count: 3 }
   ];
 
-  // Filter featured projects
   const filteredFeatured = FEATURED_PROJECTS.filter((p) => {
     if (activeFilter === 'all') return true;
     return p.category === activeFilter;
   });
 
-  // Filter other projects
   const filteredOther = OTHER_PROJECTS.filter((p) => {
     if (activeFilter === 'all') return true;
     return p.category === activeFilter;
   });
 
   return (
-    <section id="projects" className="projects-section section-padding">
+    <section id="projects" className="projects-section section-padding-compact">
       <div className="container">
         {/* Section Header */}
-        <div className="section-header-block">
-          <span className="section-eyebrow">Case Studies & Engineering Work</span>
-          <h2 className="section-heading">Featured Mobile Applications</h2>
+        <div className="section-header-block compact-header">
+          <span className="section-eyebrow">Portfolio</span>
+          <h2 className="section-heading">Featured Applications</h2>
           <p className="section-subtext">
-            Production Flutter systems engineered with Clean Architecture, high-frequency WebSockets, offline-first caching, and 90fps user interfaces.
+            Clean, production-grade Flutter apps. Click any card or expand to inspect architecture & features.
           </p>
         </div>
 
         {/* Filter Pills */}
-        <div className="project-filter-bar">
+        <div className="project-filter-bar compact-filter-bar">
           {filters.map((f) => (
             <button
               key={f.id}
@@ -53,137 +59,157 @@ export const FeaturedProjects = () => {
           ))}
         </div>
 
-        {/* Featured Projects - Large Case Study Showcases */}
-        <div className="featured-projects-stack">
-          {filteredFeatured.map((project, index) => (
-            <motion.article
-              key={project.id}
-              className={`featured-case-study ${index % 2 === 1 ? 'reverse-layout' : ''}`}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: '-60px' }}
-              transition={{ duration: 0.6, ease: 'easeOut' }}
-            >
-              {/* Device Mockup Display with Real App Screenshot */}
-              <div className="case-study-visual">
-                <div className="device-mockup-wrapper">
-                  <div className="device-phone">
-                    <div className="device-notch"></div>
-                    <div className="device-screen">
-                      <img
-                        src={project.image}
-                        alt={`${project.name} UI showcase`}
-                        className="device-screenshot"
-                        loading="lazy"
-                      />
+        {/* Minimalist 16:9 Row Grid */}
+        <div className="projects-row-grid">
+          {filteredFeatured.map((project) => {
+            const isExpanded = !!expandedCards[project.id];
+
+            return (
+              <motion.article
+                key={project.id}
+                className={`project-row-card ${isExpanded ? 'is-expanded' : ''}`}
+                initial={{ opacity: 0, y: 14 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: '-20px' }}
+                transition={{ duration: 0.3 }}
+              >
+                {/* 16:9 Image Container */}
+                <div
+                  className="project-image-16-9-wrapper"
+                  onClick={() => setSelectedCaseStudy(project)}
+                  title="Click to view full case study"
+                >
+                  <img
+                    src={project.image}
+                    alt={`${project.name} Application Showcase`}
+                    className="project-image-16-9"
+                    loading="lazy"
+                  />
+                  <div className="image-hover-overlay">
+                    <span className="overlay-inspect-btn">
+                      <i className="fas fa-expand"></i> View Case Study
+                    </span>
+                  </div>
+                  <div className="card-floating-badge-bar">
+                    <span className="badge-tag live-badge">{project.badge}</span>
+                    {project.rating && (
+                      <span className="rating-tag">
+                        <i className="fas fa-star"></i> {project.rating}
+                      </span>
+                    )}
+                  </div>
+                </div>
+
+                {/* Minimalist Default Card Body */}
+                <div className="project-card-body">
+                  <div className="card-top-meta">
+                    <span className="platform-tag">
+                      <i className="fas fa-mobile-screen"></i> {project.platform}
+                    </span>
+                    <span className="card-role-pill">
+                      <i className="fas fa-user-check"></i> {project.role}
+                    </span>
+                  </div>
+
+                  <h3 className="project-card-title">{project.name}</h3>
+                  <p className="project-card-tagline">{project.tagline}</p>
+
+                  {/* Core Tech Stack */}
+                  <div className="project-tech-pills">
+                    {project.tech.slice(0, 4).map((t, idx) => (
+                      <span key={idx} className="tech-tag">{t}</span>
+                    ))}
+                    {project.tech.length > 4 && (
+                      <span className="tech-tag tech-tag-more">+{project.tech.length - 4}</span>
+                    )}
+                  </div>
+
+                  {/* Expandable In-Depth Details (Hidden by Default for Simplicity) */}
+                  <AnimatePresence>
+                    {isExpanded && (
+                      <motion.div
+                        className="project-expandable-content"
+                        initial={{ opacity: 0, height: 0 }}
+                        animate={{ opacity: 1, height: 'auto' }}
+                        exit={{ opacity: 0, height: 0 }}
+                        transition={{ duration: 0.25, ease: 'easeInOut' }}
+                      >
+                        <div className="expandable-inner-box">
+                          <div className="detail-item">
+                            <span className="detail-label">Challenge:</span>
+                            <p className="detail-text">{project.problem}</p>
+                          </div>
+                          <div className="detail-item">
+                            <span className="detail-label">Solution:</span>
+                            <p className="detail-text">{project.solution}</p>
+                          </div>
+
+                          <div className="detail-features">
+                            <span className="detail-label">Key Capabilities:</span>
+                            <ul className="project-features-list">
+                              {project.keyFeatures.map((feat, idx) => (
+                                <li key={idx}>
+                                  <i className="fas fa-check-circle"></i>
+                                  <span>{feat}</span>
+                                </li>
+                              ))}
+                            </ul>
+                          </div>
+                        </div>
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+
+                  {/* Action Row */}
+                  <div className="project-card-actions">
+                    <button
+                      className="btn-toggle-expand"
+                      onClick={() => toggleExpand(project.id)}
+                      aria-expanded={isExpanded}
+                    >
+                      <span>{isExpanded ? 'Less Details' : 'Expand Details'}</span>
+                      <i className={`fas ${isExpanded ? 'fa-chevron-up' : 'fa-chevron-down'}`}></i>
+                    </button>
+
+                    <button
+                      className="btn btn-outline btn-sm"
+                      onClick={() => setSelectedCaseStudy(project)}
+                      title="Open full interactive case study"
+                    >
+                      <i className="fas fa-file-lines"></i>
+                      <span>Case Study</span>
+                    </button>
+
+                    <div className="card-direct-links">
+                      {project.links.map((link, idx) => {
+                        if (link.isBadgeOnly) return null;
+                        return (
+                          <a
+                            key={idx}
+                            href={link.url}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="card-icon-link"
+                            aria-label={link.label}
+                            title={link.label}
+                          >
+                            <i className={link.icon}></i>
+                          </a>
+                        );
+                      })}
                     </div>
                   </div>
-                  <div className="device-glow-shadow"></div>
                 </div>
-
-                <button
-                  className="quick-expand-btn"
-                  onClick={() => setSelectedCaseStudy(project)}
-                  title="Expand Case Study"
-                >
-                  <i className="fas fa-up-right-and-down-left-from-center"></i>
-                  <span>Inspect Case Study</span>
-                </button>
-              </div>
-
-              {/* Case Study Technical Narrative */}
-              <div className="case-study-content">
-                <div className="case-study-header-tags">
-                  <span className="badge-tag live-badge">{project.badge}</span>
-                  <span className="platform-tag">
-                    <i className="fas fa-mobile-screen"></i> {project.platform}
-                  </span>
-                  {project.rating && (
-                    <span className="rating-tag">
-                      <i className="fas fa-star"></i> {project.rating}
-                    </span>
-                  )}
-                </div>
-
-                <h3 className="case-study-title">{project.name}</h3>
-                <p className="case-study-tagline">{project.tagline}</p>
-
-                <div className="case-study-role-box">
-                  <span className="role-label">Role:</span>
-                  <span className="role-value">{project.role}</span>
-                </div>
-
-                {/* Problem & Solution Brief */}
-                <div className="case-study-synopsis">
-                  <div className="synopsis-item">
-                    <span className="synopsis-label">Challenge:</span>
-                    <p className="synopsis-text">{project.problem}</p>
-                  </div>
-                  <div className="synopsis-item">
-                    <span className="synopsis-label">Solution:</span>
-                    <p className="synopsis-text">{project.solution}</p>
-                  </div>
-                </div>
-
-                {/* Key Features */}
-                <div className="case-study-highlights">
-                  <span className="highlights-label">Key Engineering Features:</span>
-                  <ul className="highlights-list">
-                    {project.keyFeatures.slice(0, 3).map((feat, idx) => (
-                      <li key={idx}>
-                        <i className="fas fa-circle-check"></i>
-                        <span>{feat}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-
-                {/* Tech Stack Pills */}
-                <div className="case-study-tech-row">
-                  {project.tech.map((t, idx) => (
-                    <span key={idx} className="tech-tag">{t}</span>
-                  ))}
-                </div>
-
-                {/* Actions & Links */}
-                <div className="case-study-actions">
-                  <button
-                    className="btn btn-primary"
-                    onClick={() => setSelectedCaseStudy(project)}
-                  >
-                    <i className="fas fa-file-lines"></i>
-                    <span>Full Case Study</span>
-                  </button>
-
-                  {project.links.map((link, idx) => {
-                    if (link.isBadgeOnly) return null;
-                    return (
-                      <a
-                        key={idx}
-                        href={link.url}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="btn btn-outline"
-                      >
-                        <i className={link.icon}></i>
-                        <span>{link.label}</span>
-                      </a>
-                    );
-                  })}
-                </div>
-              </div>
-            </motion.article>
-          ))}
+              </motion.article>
+            );
+          })}
         </div>
 
-        {/* Other Notable Engineering Projects */}
+        {/* Additional Architecture & Open-Source Projects */}
         {filteredOther.length > 0 && (
-          <div className="other-projects-block">
-            <div className="sub-header-block">
-              <h3 className="sub-heading">Additional Systems & Open-Source Repositories</h3>
-              <p className="sub-description">
-                Clean Architecture implementations, real-time Agora SDK video tools, and marketplace backends.
-              </p>
+          <div className="other-projects-block compact-other-block">
+            <div className="sub-header-block compact-sub-header">
+              <h3 className="sub-heading">Additional Systems & OSS</h3>
             </div>
 
             <div className="other-projects-grid">
@@ -191,10 +217,10 @@ export const FeaturedProjects = () => {
                 <motion.div
                   key={proj.id}
                   className="other-project-card"
-                  initial={{ opacity: 0, y: 20 }}
+                  initial={{ opacity: 0, y: 14 }}
                   whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true, margin: '-40px' }}
-                  transition={{ duration: 0.4 }}
+                  viewport={{ once: true, margin: '-20px' }}
+                  transition={{ duration: 0.25 }}
                 >
                   <div className="other-card-top">
                     <span className="project-badge">{proj.badge}</span>
@@ -216,7 +242,6 @@ export const FeaturedProjects = () => {
                   </div>
 
                   <h4 className="other-card-title">{proj.name}</h4>
-                  <p className="other-card-tagline">{proj.tagline}</p>
                   <p className="other-card-desc">{proj.description}</p>
 
                   <div className="other-card-tech">

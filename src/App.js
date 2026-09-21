@@ -4,6 +4,7 @@ import './App.css';
 
 import { Navbar } from './components/Navbar';
 import { Hero } from './components/Hero';
+import { GithubStreak } from './components/GithubStreak';
 import { About } from './components/About';
 import { FeaturedProjects } from './components/FeaturedProjects';
 import { Skills } from './components/Skills';
@@ -99,9 +100,10 @@ function App() {
         toggleTheme={toggleTheme}
       />
 
-      {/* Main Portfolio Sections */}
+      {/* Main Portfolio Content */}
       <main id="main-content">
         <Hero />
+        <GithubStreak />
         <About />
         <FeaturedProjects />
         <Skills />

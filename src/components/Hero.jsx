@@ -3,6 +3,53 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { PERSONAL_INFO } from '../data/portfolioData';
 
+const FlutterIcon = ({ size = 14, className = '' }) => (
+  <svg
+    width={size}
+    height={size}
+    viewBox="0 0 24 24"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+    className={className}
+    style={{ display: 'inline-block', verticalAlign: 'middle' }}
+  >
+    <path d="M14.314 0L2.3 12 6 15.7 21.714 0h-7.4z" fill="#46D1FD" />
+    <path d="M14.286 11.286L6.857 18.714 10.571 22.429 18 15 21.714 11.286h-7.428z" fill="#46D1FD" />
+    <path d="M14.286 18.714l3.714 3.715H21.714l-3.714-3.715-3.714 3.715z" fill="#02569B" />
+  </svg>
+);
+
+// Staggered entrance for the left column
+const containerVariants = {
+  hidden: { opacity: 0 },
+  show: {
+    opacity: 1,
+    transition: { staggerChildren: 0.09, delayChildren: 0.05 },
+  },
+};
+
+const itemVariants = {
+  hidden: { opacity: 0, y: 18 },
+  show: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.55, ease: [0.16, 1, 0.3, 1] },
+  },
+};
+
+// Signature Dart snippet rendered beneath the portrait - [text, tokenClass?]
+const CODE_LINES = [
+  [['class ', 'tok-key'], ['FlutterEngineer ', 'tok-cls'], ['implements ', 'tok-key'], ['ProblemSolver', 'tok-cls'], [' {']],
+  [['  final ', 'tok-key'], ['String ', 'tok-cls'], ['name = '], ["'MD Ismail Hosen'", 'tok-str'], [';']],
+  [['  final ', 'tok-key'], ['List<String>', 'tok-cls'], [' focus = [']],
+  [["    'Clean Architecture'", 'tok-str'], [',']],
+  [["    'High-Performance 90fps'", 'tok-str'], [',']],
+  [["    'App Store & Google Play'", 'tok-str']],
+  [['  ];']],
+  [['  void ', 'tok-key'], ['shipProductionApp', 'tok-fn'], ['() => '], ['Success', 'tok-cls'], ['();']],
+  [['}']],
+];
+
 export const Hero = () => {
   const scrollTo = (id) => {
     const el = document.getElementById(id);
@@ -11,58 +58,58 @@ export const Hero = () => {
 
   return (
     <section id="hero" className="hero-section">
-      <div className="hero-glow-bg"></div>
+      {/* Ambient background glows */}
+      <div className="hero-glow-bg" aria-hidden="true"></div>
+      <div className="hero-glow-secondary" aria-hidden="true"></div>
+
       <div className="container hero-container">
+        {/* Left Column: Identity, Value Proposition & Actions */}
         <motion.div
           className="hero-content"
-          initial={{ opacity: 0, y: 24 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, ease: 'easeOut' }}
+          variants={containerVariants}
+          initial="hidden"
+          animate="show"
         >
-          {/* Status Badge */}
-          <div className="hero-status-pill">
+          {/* Availability Badge */}
+          <motion.div className="hero-status-pill" variants={itemVariants}>
             <span className="status-indicator-dot"></span>
-            <span className="status-text">Available for Full-time Roles & Freelance Projects</span>
-          </div>
+            <span className="status-text">Available for Full-Time Roles &amp; Contracts</span>
+          </motion.div>
 
-          <h1 className="hero-title">
+          <motion.h1 className="hero-title" variants={itemVariants}>
             Hi, I'm <span className="highlight-gradient">{PERSONAL_INFO.name}</span>
-          </h1>
+          </motion.h1>
 
-          <h2 className="hero-subtitle">
+          <motion.h2 className="hero-subtitle" variants={itemVariants}>
             <span className="role-accent">Junior Software Engineer</span>
-            <span className="role-divider">|</span>
-            <span className="flutter-accent">Flutter Developer</span>
-          </h2>
+            <span className="role-divider" aria-hidden="true"></span>
+            <span className="flutter-accent">
+              <FlutterIcon size={18} /> Flutter Developer
+            </span>
+          </motion.h2>
 
-          <p className="hero-description">
-            Specializing in high-performance, cross-platform iOS and Android mobile engineering with Flutter & Dart. 
-            Passionate about Clean Architecture, 90fps responsive user experiences, and production-ready APIs.
-          </p>
+          <motion.p className="hero-description" variants={itemVariants}>
+            I build high-performance, cross-platform iOS &amp; Android apps with Flutter &amp; Dart —
+            engineered around Clean Architecture, fluid 90fps interfaces, and production-grade APIs.
+          </motion.p>
 
-          {/* Quick Technical Highlights */}
-          <div className="hero-quick-tags">
-            <span className="tech-badge"><i className="fab fa-flutter"></i> Flutter & Dart</span>
+          {/* Technical Highlights */}
+          <motion.div className="hero-quick-tags" variants={itemVariants}>
+            <span className="tech-badge"><FlutterIcon size={14} /> Flutter &amp; Dart</span>
             <span className="tech-badge"><i className="fas fa-layer-group"></i> Clean Architecture</span>
             <span className="tech-badge"><i className="fas fa-bolt"></i> 90 FPS Fluidity</span>
-            <span className="tech-badge"><i className="fas fa-cubes"></i> Provider & GetX</span>
-            <span className="tech-badge"><i className="fas fa-cloud"></i> Firebase & REST APIs</span>
-          </div>
+            <span className="tech-badge"><i className="fas fa-cubes"></i> Provider &amp; GetX</span>
+            <span className="tech-badge"><i className="fas fa-cloud"></i> Firebase &amp; REST APIs</span>
+          </motion.div>
 
-          {/* Primary & Secondary Call to Actions */}
-          <div className="hero-cta-group">
-            <button
-              onClick={() => scrollTo('projects')}
-              className="btn btn-primary"
-            >
+          {/* Primary & Secondary Actions */}
+          <motion.div className="hero-cta-group" variants={itemVariants}>
+            <button onClick={() => scrollTo('projects')} className="btn btn-primary">
               <span>View Projects</span>
               <i className="fas fa-arrow-down"></i>
             </button>
 
-            <button
-              onClick={() => scrollTo('contact')}
-              className="btn btn-secondary"
-            >
+            <button onClick={() => scrollTo('contact')} className="btn btn-secondary">
               <span>Contact Me</span>
               <i className="fas fa-envelope"></i>
             </button>
@@ -75,10 +122,10 @@ export const Hero = () => {
               <span>Resume</span>
               <i className="fas fa-file-arrow-down"></i>
             </a>
-          </div>
+          </motion.div>
 
           {/* Social Links */}
-          <div className="hero-socials">
+          <motion.div className="hero-socials" variants={itemVariants}>
             <span className="socials-label">Connect:</span>
             <a
               href={PERSONAL_INFO.github}
@@ -121,55 +168,58 @@ export const Hero = () => {
             <span className="location-tag">
               <i className="fas fa-location-dot"></i> {PERSONAL_INFO.location}
             </span>
-          </div>
+          </motion.div>
         </motion.div>
 
-        {/* Visual Element: Profile Card with Interactive Flutter Code Mockup */}
+        {/* Right Column: Engineer Spotlight */}
         <motion.div
-          className="hero-visual-card-wrapper"
-          initial={{ opacity: 0, scale: 0.95 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.7, delay: 0.2, ease: 'easeOut' }}
+          className="hero-spotlight-wrapper"
+          initial={{ opacity: 0, y: 26, scale: 0.97 }}
+          animate={{ opacity: 1, y: 0, scale: 1 }}
+          transition={{ duration: 0.65, delay: 0.15, ease: [0.16, 1, 0.3, 1] }}
         >
-          <div className="hero-photo-container">
-            <div className="hero-photo-ring">
-              <img
-                src={PERSONAL_INFO.profilePhoto}
-                alt={PERSONAL_INFO.name}
-                className="hero-photo-img"
-              />
+          {/* Floating Circular Portrait with Credential Chips */}
+          <div className="hero-portrait-stage">
+            <div className="spotlight-portrait-ring">
+              <div className="spotlight-portrait-inner">
+                <img
+                  src={PERSONAL_INFO.profilePhoto}
+                  alt={PERSONAL_INFO.name}
+                  className="spotlight-portrait-img"
+                  loading="eager"
+                />
+              </div>
             </div>
-            <div className="hero-floating-badge badge-flutter">
-              <i className="fab fa-flutter"></i>
+
+            <div className="spotlight-chip chip-top-left">
+              <i className="fas fa-circle-check"></i>
               <span>Production Ready</span>
             </div>
-            <div className="hero-floating-badge badge-performance">
+            <div className="spotlight-chip chip-bottom-right">
               <i className="fas fa-gauge-high"></i>
               <span>90 FPS Rendering</span>
             </div>
           </div>
 
-          {/* Clean Code Snippet Window */}
-          <div className="hero-code-snippet">
-            <div className="snippet-header">
-              <div className="snippet-dots">
-                <span className="dot dot-red"></span>
-                <span className="dot dot-yellow"></span>
-                <span className="dot dot-green"></span>
+          {/* Signature Dart Code Snippet */}
+          <div className="spotlight-code-card">
+            <div className="code-card-header">
+              <div className="code-dots" aria-hidden="true">
+                <span className="code-dot dot-red"></span>
+                <span className="code-dot dot-amber"></span>
+                <span className="code-dot dot-green"></span>
               </div>
-              <span className="snippet-file">clean_architecture.dart</span>
+              <span className="code-filename">clean_architecture.dart</span>
             </div>
-            <pre className="snippet-body">
+            <pre className="code-snippet">
               <code>
-                <span className="code-kw">class</span> <span className="code-type">FlutterEngineer</span> <span className="code-kw">implements</span> <span className="code-type">ProblemSolver</span> &#123;{'\n'}
-                {'  '}<span className="code-kw">final</span> String name = <span className="code-str">'MD Ismail Hosen'</span>;{'\n'}
-                {'  '}<span className="code-kw">final</span> List&lt;String&gt; focus = [{'\n'}
-                {'    '}<span className="code-str">'Clean Architecture'</span>,{'\n'}
-                {'    '}<span className="code-str">'High-Performance 90fps'</span>,{'\n'}
-                {'    '}<span className="code-str">'App Store & Google Play'</span>{'\n'}
-                {'  '}];{'\n'}
-                {'  '}<span className="code-type">void</span> <span className="code-fn">shipProductionApp</span>() =&gt; <span className="code-type">Success</span>();{'\n'}
-                &#125;
+                {CODE_LINES.map((line, i) => (
+                  <span className="code-line" key={i}>
+                    {line.map((tok, j) => (
+                      <span key={j} className={tok[1]}>{tok[0]}</span>
+                    ))}
+                  </span>
+                ))}
               </code>
             </pre>
           </div>
