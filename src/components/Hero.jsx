@@ -89,8 +89,7 @@ export const Hero = () => {
           </motion.h2>
 
           <motion.p className="hero-description" variants={itemVariants}>
-            I build high-performance, cross-platform iOS &amp; Android apps with Flutter &amp; Dart —
-            engineered around Clean Architecture, fluid 90fps interfaces, and production-grade APIs.
+            Production-focused Flutter developer building high-performance iOS &amp; Android applications with Clean Architecture and fluid 90fps interfaces.
           </motion.p>
 
           {/* Technical Highlights */}
@@ -109,9 +108,9 @@ export const Hero = () => {
               <i className="fas fa-arrow-down"></i>
             </button>
 
-            <button onClick={() => scrollTo('contact')} className="btn btn-secondary">
-              <span>Contact Me</span>
-              <i className="fas fa-envelope"></i>
+            <button onClick={() => scrollTo('experience')} className="btn btn-secondary">
+              <span>Experience</span>
+              <i className="fas fa-briefcase"></i>
             </button>
 
             <a

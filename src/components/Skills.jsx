@@ -5,14 +5,14 @@ import { SKILL_CATEGORIES } from '../data/portfolioData';
 
 export const Skills = () => {
   return (
-    <section id="skills" className="skills-section section-padding">
+    <section id="skills" className="skills-section section-padding-compact">
       <div className="container">
         {/* Section Header */}
-        <div className="section-header-block">
+        <div className="section-header-block compact-header">
           <span className="section-eyebrow">Technical Competencies</span>
-          <h2 className="section-heading">Core Skills & Tooling</h2>
+          <h2 className="section-heading">Core Skills &amp; Tooling</h2>
           <p className="section-subtext">
-            Categorized technical stack focused on scalable architecture, native performance, and production release pipelines.
+            Categorized technical stack focused on scalable architecture, native performance, and tooling.
           </p>
         </div>
 
@@ -56,19 +56,6 @@ export const Skills = () => {
               </div>
             </motion.div>
           ))}
-        </div>
-
-        {/* Engineering Methodology Note */}
-        <div className="engineering-approach-banner">
-          <div className="approach-badge">
-            <i className="fas fa-check-double"></i>
-          </div>
-          <div className="approach-content">
-            <h4 className="approach-title">Production-First Quality Standard</h4>
-            <p className="approach-text">
-              Every mobile application is structured around strict Clean Architecture (UI &rarr; Controller/Bloc &rarr; Repository &rarr; Data Sources), ensuring decoupling from platform-specific APIs, high testability, and seamless code reviews.
-            </p>
-          </div>
         </div>
       </div>
     </section>

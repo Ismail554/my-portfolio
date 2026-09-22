@@ -41,7 +41,7 @@ export const FEATURED_PROJECTS = [
     image: scoreLiveImg,
     rating: '4.8 ★',
     platform: 'iOS · Android',
-    role: 'QA & Flutter Engineer',
+    role: 'Lead Flutter Developer',
     problem: 'Live match statistics require sub-second latency without draining battery or causing UI lag.',
     solution: 'Engineered a Flutter app processing 100+ WebSocket events/sec with 6-language i18n and 4.8 store rating.',
     keyFeatures: [
@@ -84,7 +84,7 @@ export const FEATURED_PROJECTS = [
     image: spartstImg,
     rating: '90 FPS UI',
     platform: 'iOS · Android',
-    role: 'Mobile Software Engineer',
+    role: 'Lead Flutter Developer',
     problem: 'Athletes lack a unified platform to reserve courts, monitor workouts, and checkout seamlessly.',
     solution: 'Designed a high-refresh-rate Flutter app with interactive slot booking calendars and workout analytics.',
     keyFeatures: [
@@ -105,7 +105,7 @@ export const FEATURED_PROJECTS = [
     image: quranAzkarImg,
     rating: 'Offline-First',
     platform: 'iOS · Android',
-    role: 'Solo Mobile Engineer',
+    role: 'Lead Flutter Developer',
     problem: 'Users need instant offline access to verses, recitations, and accurate prayer timings.',
     solution: 'Engineered an offline-first SQLite Flutter app with native Arabic typography and GPS-based prayer algorithms.',
     keyFeatures: [

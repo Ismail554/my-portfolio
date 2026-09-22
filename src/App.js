@@ -54,7 +54,7 @@ function App() {
 
   // Intersection Observer for Active Section Highlighting
   useEffect(() => {
-    const sections = ['hero', 'about', 'projects', 'skills', 'experience', 'resume', 'contact'];
+    const sections = ['hero', 'projects', 'experience', 'skills', 'resume', 'about', 'contact'];
     const observerOptions = {
       root: null,
       rootMargin: '-20% 0px -60% 0px',
@@ -104,11 +104,11 @@ function App() {
       <main id="main-content">
         <Hero />
         <GithubStreak />
-        <About />
         <FeaturedProjects />
-        <Skills />
         <Experience />
+        <Skills />
         <ResumeSection />
+        <About />
         <Contact />
       </main>
 

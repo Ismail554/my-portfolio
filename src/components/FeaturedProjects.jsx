@@ -38,10 +38,10 @@ export const FeaturedProjects = () => {
       <div className="container">
         {/* Section Header */}
         <div className="section-header-block compact-header">
-          <span className="section-eyebrow">Portfolio</span>
+          <span className="section-eyebrow">Production Portfolio</span>
           <h2 className="section-heading">Featured Applications</h2>
           <p className="section-subtext">
-            Clean, production-grade Flutter apps. Click any card or expand to inspect architecture & features.
+            Production-grade Flutter apps shipped to Google Play &amp; App Store.
           </p>
         </div>
 

@@ -15,11 +15,11 @@ export const Navbar = ({ activeSection, isDarkMode, toggleTheme }) => {
   }, []);
 
   const navLinks = [
-    { name: 'About', href: '#about' },
     { name: 'Projects', href: '#projects' },
-    { name: 'Skills', href: '#skills' },
     { name: 'Experience', href: '#experience' },
+    { name: 'Skills', href: '#skills' },
     { name: 'Resume', href: '#resume' },
+    { name: 'About', href: '#about' },
     { name: 'Contact', href: '#contact' }
   ];
 

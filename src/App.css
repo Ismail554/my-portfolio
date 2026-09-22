@@ -1023,188 +1023,197 @@ body {
 [data-theme='light'] .legend-tile.level-4 { background: #0369a1; }
 
 /* --------------------------------------------------------------------------
-   7. About Section (Streamlined)
+   7. About Section (Compact Engineering Journey & Profile)
    -------------------------------------------------------------------------- */
-.about-section {
+.about-compact-section {
   background: var(--bg-surface);
   border-top: 1px solid var(--border-subtle);
   border-bottom: 1px solid var(--border-subtle);
 }
 
-.about-grid {
+.about-compact-card {
+  background: var(--bg-card);
+  border: var(--border-card);
+  border-radius: var(--radius-lg);
+  padding: 1.85rem;
+  box-shadow: var(--shadow-sm);
+  transition: border-color var(--transition-fast);
+}
+
+.about-compact-card:hover {
+  border-color: var(--border-hover);
+}
+
+.about-compact-grid {
   display: grid;
-  grid-template-columns: 1.35fr 0.85fr;
+  grid-template-columns: 1.3fr 0.9fr;
   gap: 2rem;
   align-items: start;
 }
 
-.about-narrative-card {
-  background: var(--bg-card);
-  border: var(--border-card);
-  border-radius: var(--radius-lg);
-  padding: 2rem;
+.about-compact-summary {
+  margin-bottom: 1.25rem;
 }
 
-.narrative-heading {
-  font-size: 1.35rem;
-  font-weight: 700;
+.about-compact-lead {
+  font-size: 0.975rem;
+  font-weight: 600;
   color: var(--text-main);
-  margin-bottom: 1rem;
-  line-height: 1.35;
+  line-height: 1.5;
+  margin-bottom: 0.45rem;
 }
 
-.narrative-p {
-  font-size: 0.925rem;
+.about-compact-desc {
+  font-size: 0.85rem;
   color: var(--text-secondary);
-  line-height: 1.6;
-  margin-bottom: 0.85rem;
+  line-height: 1.5;
 }
 
-.engineering-pillars {
+/* Compact 4 Pillars */
+.compact-pillars-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 1rem;
-  margin-top: 1.5rem;
-  padding-top: 1.5rem;
-  border-top: 1px solid var(--border-subtle);
-}
-
-.pillar-item {
-  display: flex;
-  align-items: flex-start;
   gap: 0.75rem;
 }
 
-.pillar-icon {
-  width: 32px;
-  height: 32px;
+.compact-pillar-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.65rem;
+  background: var(--bg-surface);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  padding: 0.7rem 0.75rem;
+  transition: all var(--transition-fast);
+}
+
+.compact-pillar-item:hover {
+  border-color: var(--border-hover);
+  background: var(--bg-card-hover);
+}
+
+.compact-pillar-item .pillar-icon {
+  width: 30px;
+  height: 30px;
   border-radius: 6px;
   background: var(--glow-primary);
-  border: 1px solid var(--border-subtle);
+  border: 1px solid rgba(56, 189, 248, 0.2);
   color: var(--flutter-cyan);
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 0.85rem;
+  font-size: 0.8rem;
   flex-shrink: 0;
 }
 
-.pillar-title {
-  font-size: 0.85rem;
-  font-weight: 700;
-  color: var(--text-main);
-  margin-bottom: 0.2rem;
-}
-
-.pillar-desc {
-  font-size: 0.775rem;
-  color: var(--text-muted);
-  line-height: 1.4;
-}
-
-/* Metrics Sidebar */
-.about-metrics-sidebar {
+.compact-pillar-item .pillar-text {
   display: flex;
   flex-direction: column;
-  gap: 1.5rem;
 }
 
-.metrics-card-wrapper {
-  background: var(--bg-card);
-  border: var(--border-card);
-  border-radius: var(--radius-lg);
-  padding: 1.5rem;
-}
-
-.metrics-card-title {
-  font-size: 0.95rem;
+.compact-pillar-item .pillar-title {
+  font-size: 0.8rem;
   font-weight: 700;
   color: var(--text-main);
-  margin-bottom: 1rem;
-  padding-bottom: 0.5rem;
-  border-bottom: 1px solid var(--border-subtle);
+  margin-bottom: 0.15rem;
 }
 
-.metrics-items-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
+.compact-pillar-item .pillar-sub {
+  font-size: 0.7rem;
+  color: var(--text-muted);
+  line-height: 1.35;
+}
+
+/* Right Side: Metrics & Specs */
+.about-compact-right {
+  display: flex;
+  flex-direction: column;
   gap: 1rem;
 }
 
-.metric-box {
+.compact-block-label {
+  display: block;
+  font-size: 0.725rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--flutter-cyan);
+  margin-bottom: 0.6rem;
+}
+
+.compact-metrics-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.65rem;
+}
+
+.compact-metric-tile {
   background: var(--bg-surface);
   border: 1px solid var(--border-subtle);
   border-radius: var(--radius-md);
-  padding: 0.85rem 0.75rem;
+  padding: 0.75rem 0.65rem;
   display: flex;
   flex-direction: column;
   align-items: center;
   text-align: center;
+  transition: transform var(--transition-fast), border-color var(--transition-fast);
 }
 
-.metric-val {
-  font-size: 1.5rem;
+.compact-metric-tile:hover {
+  transform: translateY(-2px);
+  border-color: var(--border-hover);
+}
+
+.c-metric-val {
+  font-size: 1.35rem;
   font-weight: 800;
   color: var(--flutter-cyan);
   line-height: 1.2;
 }
 
-.metric-lbl {
-  font-size: 0.8rem;
-  font-weight: 700;
-  color: var(--text-main);
-  margin: 0.25rem 0 0.15rem 0;
+.c-metric-lbl {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  margin-top: 0.2rem;
 }
 
-.metric-hlp {
-  font-size: 0.7rem;
-  color: var(--text-muted);
+.compact-specs-box {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  padding: 0.85rem 1rem;
 }
 
-.quick-info-box {
-  background: var(--bg-card);
-  border: var(--border-card);
-  border-radius: var(--radius-lg);
-  padding: 1.5rem;
-}
-
-.quick-info-title {
-  font-size: 0.95rem;
-  font-weight: 700;
-  color: var(--text-main);
-  margin-bottom: 1rem;
-}
-
-.quick-info-list {
+.compact-specs-list {
   list-style: none;
   display: flex;
   flex-direction: column;
-  gap: 0.65rem;
+  gap: 0.45rem;
+  margin: 0;
+  padding: 0;
 }
 
-.quick-info-list li {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  font-size: 0.8125rem;
-  padding-bottom: 0.6rem;
-  border-bottom: 1px solid var(--border-subtle);
-}
-
-.quick-info-list li:last-child {
-  border-bottom: none;
-  padding-bottom: 0;
-}
-
-.info-label {
-  color: var(--text-muted);
+.compact-specs-list li {
   display: flex;
   align-items: center;
-  gap: 0.35rem;
+  gap: 0.55rem;
+  font-size: 0.78rem;
+  color: var(--text-secondary);
 }
 
-.info-label i { color: var(--flutter-cyan); }
-.info-value { font-weight: 600; color: var(--text-main); }
+.compact-specs-list li i {
+  color: var(--flutter-cyan);
+  font-size: 0.75rem;
+  width: 16px;
+  text-align: center;
+  flex-shrink: 0;
+}
+
+.compact-specs-list li strong {
+  color: var(--text-main);
+  font-weight: 600;
+}
 
 /* --------------------------------------------------------------------------
    8. Featured Projects - Compact 16:9 Row Showcase
@@ -1959,8 +1968,64 @@ body {
 }
 
 /* --------------------------------------------------------------------------
-   11. Experience Section
+   11. Experience Section (Elevated Timeline & Leadership Hub)
    -------------------------------------------------------------------------- */
+.experience-highlights-strip {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+  max-width: 860px;
+  margin: 0 auto 2.25rem auto;
+}
+
+.exp-highlight-item {
+  background: var(--bg-card);
+  border: var(--border-card);
+  border-radius: var(--radius-md);
+  padding: 0.9rem 1.1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  transition: all var(--transition-fast);
+  box-shadow: var(--shadow-sm);
+}
+
+.exp-highlight-item:hover {
+  border-color: var(--border-hover);
+  transform: translateY(-2px);
+}
+
+.exp-highlight-icon {
+  width: 38px;
+  height: 38px;
+  border-radius: 9px;
+  background: var(--glow-primary);
+  border: 1px solid rgba(56, 189, 248, 0.2);
+  color: var(--flutter-cyan);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.9rem;
+  flex-shrink: 0;
+}
+
+.exp-highlight-text {
+  display: flex;
+  flex-direction: column;
+}
+
+.highlight-val {
+  font-size: 0.875rem;
+  font-weight: 700;
+  color: var(--text-main);
+  line-height: 1.25;
+}
+
+.highlight-sub {
+  font-size: 0.725rem;
+  color: var(--text-muted);
+}
+
 .experience-timeline {
   display: flex;
   flex-direction: column;
@@ -1979,40 +2044,74 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 20px;
+  width: 40px;
   flex-shrink: 0;
+  position: relative;
 }
 
-.marker-dot {
-  width: 14px;
-  height: 14px;
-  border-radius: 50%;
-  background: var(--flutter-cyan);
-  border: 3px solid var(--bg-surface);
-  box-shadow: 0 0 10px var(--flutter-cyan);
-  margin-top: 1.25rem;
+.timeline-node-icon {
+  width: 38px;
+  height: 38px;
+  border-radius: 10px;
+  background: var(--bg-surface);
+  border: 2px solid var(--border-subtle);
+  color: var(--text-muted);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.9rem;
   z-index: 2;
+  transition: all var(--transition-fast);
+  margin-top: 1.25rem;
+  box-shadow: var(--shadow-sm);
+}
+
+.timeline-card-wrapper:hover .timeline-node-icon {
+  transform: scale(1.1);
+  border-color: var(--flutter-cyan);
+  color: var(--flutter-cyan);
+  box-shadow: 0 0 16px var(--glow-primary);
+}
+
+.timeline-node-icon.is-active-node {
+  border-color: var(--flutter-cyan);
+  color: var(--flutter-cyan);
+  background: var(--bg-card);
+  box-shadow: 0 0 16px rgba(56, 189, 248, 0.3);
 }
 
 .marker-line {
   width: 2px;
   flex-grow: 1;
-  background: var(--border-subtle);
+  background: linear-gradient(to bottom, var(--flutter-cyan) 0%, var(--indigo-accent) 50%, rgba(255, 255, 255, 0.08) 100%);
+  margin-top: 4px;
 }
 
-.timeline-card-wrapper:last-child .marker-line { display: none; }
+.timeline-card-wrapper:last-child .marker-line {
+  display: none;
+}
 
 .timeline-card {
   background: var(--bg-card);
   border: var(--border-card);
-  border-radius: var(--radius-md);
-  padding: 1.75rem;
-  margin-bottom: 1.75rem;
+  border-radius: var(--radius-lg);
+  padding: 1.65rem 1.75rem;
+  margin-bottom: 1.5rem;
   width: 100%;
   box-shadow: var(--shadow-sm);
+  transition: all var(--transition-smooth);
+  position: relative;
 }
 
-.timeline-card:hover { border-color: var(--border-hover); }
+.timeline-card:hover {
+  border-color: var(--border-hover);
+  box-shadow: var(--shadow-md);
+  transform: translateY(-2px);
+}
+
+.current-card-highlight {
+  border-left: 3px solid var(--flutter-cyan);
+}
 
 .timeline-card-header {
   display: flex;
@@ -2021,8 +2120,14 @@ body {
   flex-wrap: wrap;
   gap: 0.85rem;
   margin-bottom: 1rem;
-  padding-bottom: 1rem;
+  padding-bottom: 0.85rem;
   border-bottom: 1px solid var(--border-subtle);
+}
+
+.header-left-col {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
 }
 
 .role-and-type {
@@ -2030,86 +2135,168 @@ body {
   align-items: center;
   flex-wrap: wrap;
   gap: 0.5rem;
-  margin-bottom: 0.25rem;
 }
 
 .timeline-role {
   font-size: 1.15rem;
   font-weight: 800;
   color: var(--text-main);
+  letter-spacing: -0.01em;
 }
 
 .timeline-job-type {
   font-size: 0.7rem;
   font-weight: 700;
+  padding: 0.15rem 0.5rem;
+  border-radius: 999px;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.type-fulltime {
   color: var(--flutter-cyan);
   background: var(--glow-primary);
-  border: 1px solid var(--border-subtle);
-  padding: 0.15rem 0.45rem;
-  border-radius: 4px;
+  border: 1px solid rgba(56, 189, 248, 0.25);
+}
+
+.type-contract {
+  color: #a855f7;
+  background: rgba(168, 85, 247, 0.12);
+  border: 1px solid rgba(168, 85, 247, 0.25);
 }
 
 .timeline-company-row {
   display: flex;
   align-items: center;
-  gap: 0.45rem;
-  font-size: 0.85rem;
+  gap: 0.5rem;
+  font-size: 0.825rem;
   color: var(--text-secondary);
 }
 
-.company-name { font-weight: 600; }
-.company-dot { color: var(--border-subtle); }
+.company-name {
+  font-weight: 600;
+  color: var(--text-main);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.company-name i {
+  color: var(--flutter-cyan);
+  font-size: 0.8rem;
+}
+
+.company-dot {
+  color: var(--border-subtle);
+}
+
+.company-location {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  color: var(--text-muted);
+}
+
+.header-right-col {
+  display: flex;
+  align-items: center;
+}
 
 .timeline-period-badge {
   display: inline-flex;
   align-items: center;
-  gap: 0.35rem;
+  gap: 0.5rem;
   font-size: 0.775rem;
   font-weight: 600;
-  color: var(--text-muted);
+  color: var(--text-secondary);
   background: var(--bg-surface);
   border: 1px solid var(--border-subtle);
-  padding: 0.3rem 0.65rem;
+  padding: 0.35rem 0.75rem;
   border-radius: 999px;
+}
+
+.timeline-period-badge i {
+  color: var(--flutter-cyan);
+  font-size: 0.75rem;
+}
+
+.active-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  color: var(--emerald-accent);
+  font-size: 0.7rem;
+  font-weight: 700;
+  background: rgba(16, 185, 129, 0.12);
+  border: 1px solid rgba(16, 185, 129, 0.25);
+  padding: 0.1rem 0.45rem;
+  border-radius: 999px;
+  margin-left: 0.25rem;
+}
+
+.pulse-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--emerald-accent);
+  box-shadow: 0 0 0 rgba(16, 185, 129, 0.5);
+  animation: pulse-ring 1.8s infinite;
+}
+
+@keyframes pulse-ring {
+  0% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7); }
+  70% { box-shadow: 0 0 0 6px rgba(16, 185, 129, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0); }
 }
 
 .timeline-achievements {
   list-style: none;
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
-  margin-bottom: 1.25rem;
+  gap: 0.55rem;
+  margin: 0 0 1.15rem 0;
+  padding: 0;
 }
 
 .timeline-achievements li {
   display: flex;
   align-items: flex-start;
-  gap: 0.55rem;
+  gap: 0.65rem;
   font-size: 0.875rem;
   color: var(--text-secondary);
-  line-height: 1.5;
+  line-height: 1.55;
 }
 
 .timeline-achievements li i {
   color: var(--flutter-cyan);
-  margin-top: 0.3rem;
-  font-size: 0.7rem;
+  margin-top: 0.25rem;
+  font-size: 0.75rem;
+  flex-shrink: 0;
 }
 
 .timeline-tech-row {
   display: flex;
   flex-wrap: wrap;
-  gap: 0.35rem;
+  gap: 0.45rem;
+  padding-top: 0.85rem;
+  border-top: 1px solid var(--border-subtle);
 }
 
 .timeline-tech-tag {
   font-size: 0.725rem;
   font-weight: 600;
-  color: var(--text-muted);
+  color: var(--text-secondary);
   background: var(--bg-surface);
   border: 1px solid var(--border-subtle);
-  padding: 0.2rem 0.5rem;
-  border-radius: 4px;
+  padding: 0.22rem 0.55rem;
+  border-radius: 6px;
+  transition: all var(--transition-fast);
+}
+
+.timeline-tech-tag:hover {
+  border-color: var(--border-hover);
+  color: var(--flutter-cyan);
+  background: var(--bg-card-hover);
 }
 
 /* --------------------------------------------------------------------------
@@ -2121,33 +2308,48 @@ body {
   border-bottom: 1px solid var(--border-subtle);
 }
 
-.resume-layout-grid {
-  display: grid;
-  grid-template-columns: 1.15fr 0.85fr;
-  gap: 2rem;
-  align-items: start;
+.credentials-compact-layout {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
 }
 
-.resume-download-card {
+/* Resume Hub Card */
+.resume-hub-card {
   background: var(--bg-card);
   border: var(--border-card);
   border-radius: var(--radius-lg);
-  padding: 2rem;
+  padding: 1.5rem 1.75rem;
+  box-shadow: var(--shadow-sm);
+  transition: border-color var(--transition-fast);
 }
 
-.resume-card-header {
+.resume-hub-card:hover {
+  border-color: var(--border-hover);
+}
+
+.resume-hub-main {
   display: flex;
   align-items: center;
-  gap: 0.85rem;
-  margin-bottom: 1rem;
+  justify-content: space-between;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+}
+
+.resume-hub-info {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  flex: 1;
+  min-width: 280px;
 }
 
 .pdf-icon-badge {
-  width: 44px;
-  height: 44px;
-  border-radius: 10px;
-  background: rgba(239, 68, 68, 0.15);
-  border: 1px solid rgba(239, 68, 68, 0.3);
+  width: 46px;
+  height: 46px;
+  border-radius: 12px;
+  background: rgba(239, 68, 68, 0.12);
+  border: 1px solid rgba(239, 68, 68, 0.28);
   color: #ef4444;
   display: flex;
   align-items: center;
@@ -2156,26 +2358,70 @@ body {
   flex-shrink: 0;
 }
 
+.hub-title-row {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  flex-wrap: wrap;
+}
+
 .resume-doc-title {
-  font-size: 1.2rem;
+  font-size: 1.15rem;
   font-weight: 700;
   color: var(--text-main);
-  margin-bottom: 0.15rem;
+  margin: 0;
 }
 
-.resume-doc-meta { font-size: 0.775rem; color: var(--text-muted); }
-
-.resume-summary-text {
-  font-size: 0.875rem;
-  color: var(--text-secondary);
-  line-height: 1.6;
-  margin-bottom: 1.5rem;
+.hub-badge {
+  font-size: 0.7rem;
+  font-weight: 700;
+  color: var(--flutter-cyan);
+  background: var(--glow-primary);
+  border: 1px solid var(--border-subtle);
+  padding: 0.15rem 0.55rem;
+  border-radius: 999px;
 }
 
-.resume-cta-buttons { display: flex; flex-wrap: wrap; gap: 0.65rem; }
+.resume-doc-meta {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  font-size: 0.775rem;
+  color: var(--text-muted);
+  margin-top: 0.35rem;
+  flex-wrap: wrap;
+}
 
+.resume-doc-meta .meta-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.resume-doc-meta .meta-item i {
+  color: var(--flutter-cyan);
+  font-size: 0.725rem;
+}
+
+.resume-doc-meta .meta-dot {
+  color: var(--border-subtle);
+}
+
+.resume-hub-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  flex-wrap: wrap;
+}
+
+.resume-hub-actions .btn {
+  padding: 0.55rem 1rem;
+  font-size: 0.8125rem;
+}
+
+/* Embedded Resume Viewer */
 .resume-embedded-viewer {
-  margin-top: 1.5rem;
+  margin-top: 1.25rem;
   border: 1px solid var(--border-subtle);
   border-radius: var(--radius-md);
   overflow: hidden;
@@ -2194,91 +2440,159 @@ body {
   border-bottom: 1px solid var(--border-subtle);
 }
 
-.viewer-close-btn { background: transparent; border: none; color: var(--text-muted); cursor: pointer; }
-.viewer-close-btn:hover { color: #ef4444; }
+.viewer-close-btn {
+  background: transparent;
+  border: none;
+  color: var(--text-muted);
+  cursor: pointer;
+  padding: 0.2rem 0.4rem;
+  border-radius: 4px;
+}
 
-.resume-iframe { width: 100%; height: 480px; border: none; }
+.viewer-close-btn:hover {
+  color: #ef4444;
+  background: rgba(239, 68, 68, 0.1);
+}
 
-/* Education Stack */
-.education-column { display: flex; flex-direction: column; }
+.resume-iframe {
+  width: 100%;
+  height: 480px;
+  border: none;
+}
 
-.column-subtitle {
-  font-size: 1.1rem;
+/* Academic Credentials Block (3-Column Equal Grid) */
+.academic-credentials-block {
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+}
+
+.academic-header-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  padding: 0 0.25rem;
+  flex-wrap: wrap;
+}
+
+.academic-row-title {
+  font-size: 0.95rem;
   font-weight: 700;
   color: var(--text-main);
-  margin-bottom: 1.25rem;
-  display: flex;
+  display: inline-flex;
   align-items: center;
   gap: 0.45rem;
 }
 
-.column-subtitle i { color: var(--flutter-cyan); }
-.education-cards-stack { display: flex; flex-direction: column; gap: 1rem; }
+.academic-row-title i {
+  color: var(--flutter-cyan);
+}
 
-.education-card {
+.academic-row-sub {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+}
+
+.academic-cards-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+}
+
+.education-compact-card {
   background: var(--bg-card);
   border: var(--border-card);
   border-radius: var(--radius-md);
-  padding: 1.25rem;
+  padding: 1.15rem 1.25rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 0.85rem;
   transition: all var(--transition-fast);
 }
 
-.education-card:hover {
+.education-compact-card:hover {
   border-color: var(--border-hover);
+  background: var(--bg-card-hover);
   transform: translateY(-2px);
 }
 
-.edu-top-line {
+.edu-card-top {
   display: flex;
+  align-items: center;
   justify-content: space-between;
-  align-items: flex-start;
-  gap: 0.65rem;
-  margin-bottom: 0.25rem;
+  gap: 0.5rem;
 }
 
-.edu-degree { font-size: 0.95rem; font-weight: 700; color: var(--text-main); }
-
-.edu-badge {
+.edu-status-pill {
   font-size: 0.685rem;
   font-weight: 700;
   color: var(--flutter-cyan);
   background: var(--glow-primary);
-  border: 1px solid var(--border-subtle);
-  padding: 0.1rem 0.45rem;
-  border-radius: 4px;
+  border: 1px solid rgba(56, 189, 248, 0.2);
+  padding: 0.15rem 0.5rem;
+  border-radius: 999px;
 }
 
-.edu-institution {
-  font-size: 0.825rem;
-  font-weight: 600;
+.edu-period-tag {
+  font-size: 0.725rem;
+  color: var(--text-muted);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+}
+
+.edu-compact-degree {
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--text-main);
+  line-height: 1.35;
+  margin: 0 0 0.4rem 0;
+}
+
+.edu-compact-inst {
+  font-size: 0.785rem;
   color: var(--text-secondary);
   display: flex;
   align-items: center;
   gap: 0.35rem;
-  margin-bottom: 0.35rem;
 }
 
-.edu-meta-row {
+.edu-compact-inst i {
+  color: var(--flutter-cyan);
+  font-size: 0.75rem;
+}
+
+.edu-card-footer {
   display: flex;
   align-items: center;
-  gap: 0.75rem;
-  font-size: 0.775rem;
-  color: var(--text-muted);
+  justify-content: space-between;
+  gap: 0.5rem;
+  padding-top: 0.65rem;
+  border-top: 1px solid var(--border-subtle);
+  flex-wrap: wrap;
 }
 
-.edu-note-tag {
-  margin-top: 0.5rem;
+.edu-compact-loc {
   font-size: 0.725rem;
+  color: var(--text-muted);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+}
+
+.edu-compact-note {
+  font-size: 0.7rem;
   font-weight: 600;
   color: var(--emerald-accent);
   background: rgba(16, 185, 129, 0.1);
-  border: 1px solid rgba(16, 185, 129, 0.2);
+  border: 1px solid rgba(16, 185, 129, 0.22);
   padding: 0.15rem 0.45rem;
   border-radius: 4px;
   display: inline-flex;
   align-items: center;
-  gap: 0.3rem;
-  width: fit-content;
+  gap: 0.25rem;
 }
 
 /* --------------------------------------------------------------------------
@@ -2623,6 +2937,7 @@ body {
   }
 
   .about-grid,
+  .about-compact-grid,
   .resume-layout-grid,
   .contact-grid,
   .projects-row-grid {
@@ -2863,9 +3178,13 @@ body {
 
   /* About, Skills, Timeline, Contact */
   .about-grid,
+  .about-compact-grid,
+  .experience-highlights-strip,
   .skills-category-grid,
   .other-projects-grid,
   .engineering-pillars,
+  .compact-pillars-grid,
+  .academic-cards-grid,
   .form-row,
   .modal-details-grid,
   .modal-features-list {
@@ -2873,10 +3192,31 @@ body {
   }
 
   .about-narrative-card,
+  .about-compact-card,
+  .resume-hub-card,
   .primary-contact-card,
   .contact-form-card,
   .resume-download-card {
     padding: 1.25rem;
+  }
+
+  .timeline-card-wrapper {
+    gap: 0.85rem;
+  }
+
+  .timeline-marker {
+    width: 32px;
+  }
+
+  .timeline-node-icon {
+    width: 30px;
+    height: 30px;
+    font-size: 0.775rem;
+    margin-top: 1rem;
+  }
+
+  .timeline-card {
+    padding: 1.25rem 1.15rem;
   }
 
   .metrics-items-grid {

@@ -97,14 +97,14 @@ export const Contact = () => {
   };
 
   return (
-    <section id="contact" className="contact-section section-padding">
+    <section id="contact" className="contact-section section-padding-compact">
       <div className="container">
         {/* Section Header */}
-        <div className="section-header-block">
+        <div className="section-header-block compact-header">
           <span className="section-eyebrow">Get In Touch</span>
-          <h2 className="section-heading">Let's Discuss Your Next Mobile Project</h2>
+          <h2 className="section-heading">Let's Connect</h2>
           <p className="section-subtext">
-            Whether you have an open engineering role, need a custom Flutter mobile application, or want to discuss architecture, feel free to reach out.
+            Available for full-time Flutter engineer roles, contracts, and architecture consulting.
           </p>
         </div>
 
