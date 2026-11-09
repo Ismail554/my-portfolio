@@ -558,6 +558,44 @@ export const SwarmCursors = () => {
     };
   }, [isRebuilding, startSwarmRebuild, restoreAllDomTargets]);
 
+  // Auto-play Swarm Rebuild on Portfolio page load (if enabled in Admin Dashboard)
+  useEffect(() => {
+    if (process.env.NODE_ENV === 'test') return;
+    if (swarmConfig.enabled === false || swarmConfig.autoPlay === false) return;
+    if (typeof window === 'undefined') return;
+
+    // Do not auto-play if the visitor requested the /admin dashboard route
+    const path = window.location.pathname.toLowerCase();
+    const hash = window.location.hash.toLowerCase();
+    if (path.startsWith('/admin') || hash.startsWith('#/admin')) return;
+
+    // Check frequency if set to 'session'
+    if (swarmConfig.autoPlayFrequency === 'session') {
+      try {
+        if (sessionStorage.getItem('ismail_swarm_played') === 'true') {
+          return;
+        }
+      } catch {}
+    }
+
+    // Brief timeout so React finishes painting initial layout, then unleash the swarm!
+    const timer = setTimeout(() => {
+      startSwarmRebuild();
+      if (swarmConfig.autoPlayFrequency === 'session') {
+        try {
+          sessionStorage.setItem('ismail_swarm_played', 'true');
+        } catch {}
+      }
+    }, 450);
+
+    return () => clearTimeout(timer);
+  }, [
+    swarmConfig.enabled,
+    swarmConfig.autoPlay,
+    swarmConfig.autoPlayFrequency,
+    startSwarmRebuild
+  ]);
+
   // Cleanup on unmount
   useEffect(() => {
     return () => {

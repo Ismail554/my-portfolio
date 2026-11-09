@@ -349,6 +349,74 @@ export const AdminDashboard = ({ onNavigateToPortfolio, isDarkMode, toggleTheme 
                 </div>
 
                 <div className="admin-switches-grid">
+                  <div className="admin-switch-item" style={{ borderColor: siteSettings?.swarm?.autoPlay !== false ? 'var(--flutter-cyan)' : undefined }}>
+                    <div className="admin-switch-info">
+                      <i className="fas fa-play" style={{ color: siteSettings?.swarm?.autoPlay !== false ? '#34d399' : undefined }}></i>
+                      <div>
+                        <span className="admin-switch-name" style={{ display: 'block' }}>Auto-Play on Page Load</span>
+                        <span style={{ fontSize: '0.72rem', color: 'var(--text-muted)' }}>
+                          Automatically wipe &amp; rebuild with cursors when visitors land
+                        </span>
+                      </div>
+                    </div>
+                    <label className="admin-toggle-switch">
+                      <input
+                        type="checkbox"
+                        checked={siteSettings?.swarm?.autoPlay !== false}
+                        onChange={() =>
+                          updateSwarmSettings({
+                            autoPlay: !(siteSettings?.swarm?.autoPlay !== false)
+                          })
+                        }
+                      />
+                      <span className="admin-slider"></span>
+                    </label>
+                  </div>
+
+                  <div className="admin-switch-item">
+                    <div className="admin-switch-info">
+                      <i className="fas fa-rotate"></i>
+                      <div>
+                        <span className="admin-switch-name" style={{ display: 'block' }}>Auto-Play Frequency</span>
+                        <span style={{ fontSize: '0.72rem', color: 'var(--text-muted)' }}>
+                          Run on every reload or once per visitor session
+                        </span>
+                      </div>
+                    </div>
+                    <div style={{ display: 'flex', gap: '0.35rem' }}>
+                      <button
+                        type="button"
+                        className="admin-btn-action"
+                        style={{
+                          padding: '0.2rem 0.55rem',
+                          fontSize: '0.74rem',
+                          ...((siteSettings?.swarm?.autoPlayFrequency || 'always') === 'always'
+                            ? { background: 'var(--flutter-blue)', color: '#fff', borderColor: 'var(--flutter-blue)' }
+                            : {})
+                        }}
+                        onClick={() => updateSwarmSettings({ autoPlayFrequency: 'always' })}
+                        title="Auto-play every time the page is loaded"
+                      >
+                        Always
+                      </button>
+                      <button
+                        type="button"
+                        className="admin-btn-action"
+                        style={{
+                          padding: '0.2rem 0.55rem',
+                          fontSize: '0.74rem',
+                          ...((siteSettings?.swarm?.autoPlayFrequency) === 'session'
+                            ? { background: 'var(--flutter-blue)', color: '#fff', borderColor: 'var(--flutter-blue)' }
+                            : {})
+                        }}
+                        onClick={() => updateSwarmSettings({ autoPlayFrequency: 'session' })}
+                        title="Auto-play once per visitor tab session"
+                      >
+                        Per Session
+                      </button>
+                    </div>
+                  </div>
+
                   <div className="admin-switch-item">
                     <div className="admin-switch-info">
                       <i className="fas fa-wand-magic-sparkles"></i>

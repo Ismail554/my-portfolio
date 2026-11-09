@@ -46,6 +46,8 @@ const DEFAULT_SETTINGS = {
   },
   swarm: {
     enabled: true,
+    autoPlay: true,
+    autoPlayFrequency: 'always', // 'always' | 'session'
     ambientCursors: false,
     soundEnabled: true,
     defaultSpeed: 1
@@ -93,11 +95,19 @@ export const PortfolioProvider = ({ children }) => {
     };
   });
 
-  // Site Settings (Section Visibility, etc.)
+  // Site Settings (Section Visibility, Swarm Config, etc.)
   const [siteSettings, setSiteSettings] = useState(() => {
     try {
       const saved = localStorage.getItem(STORAGE_KEYS.SETTINGS);
-      if (saved) return JSON.parse(saved);
+      if (saved) {
+        const parsed = JSON.parse(saved);
+        return {
+          ...DEFAULT_SETTINGS,
+          ...parsed,
+          sections: { ...DEFAULT_SETTINGS.sections, ...(parsed.sections || {}) },
+          swarm: { ...DEFAULT_SETTINGS.swarm, ...(parsed.swarm || {}) }
+        };
+      }
     } catch (e) {
       console.error('Failed to parse site settings:', e);
     }
