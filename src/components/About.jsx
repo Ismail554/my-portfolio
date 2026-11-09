@@ -1,9 +1,17 @@
 // src/components/About.jsx
 import React from 'react';
 import { motion } from 'framer-motion';
-import { PERSONAL_INFO } from '../data/portfolioData';
+import { usePortfolio } from '../context/PortfolioContext';
 
 export const About = () => {
+  const { portfolioState } = usePortfolio();
+  const { personalInfo: PERSONAL_INFO } = portfolioState;
+
+  const bio0 = (PERSONAL_INFO.bioParagraphs && PERSONAL_INFO.bioParagraphs[0]) ||
+    "Junior Software Engineer specializing in cross-platform mobile apps with published products on the Google Play Store & Apple App Store.";
+  const bio1 = (PERSONAL_INFO.bioParagraphs && PERSONAL_INFO.bioParagraphs[1]) ||
+    "Driven by Clean Architecture, MVVM design, and frame-rate optimization. Experienced in managing WebSocket streams, Stripe payments, Agora streaming, and offline-first caching.";
+
   return (
     <section id="about" className="about-section about-compact-section section-padding-compact">
       <div className="container">
@@ -29,10 +37,10 @@ export const About = () => {
             <div className="about-compact-left">
               <div className="about-compact-summary">
                 <p className="about-compact-lead">
-                  Junior Software Engineer specializing in cross-platform mobile apps with published products on the Google Play Store &amp; Apple App Store.
+                  {bio0}
                 </p>
                 <p className="about-compact-desc">
-                  Driven by Clean Architecture, MVVM design, and frame-rate optimization. Experienced in managing WebSocket streams, Stripe payments, Agora streaming, and offline-first caching.
+                  {bio1}
                 </p>
               </div>
 

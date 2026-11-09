@@ -1,7 +1,7 @@
 // src/components/Hero.jsx
 import React from 'react';
 import { motion } from 'framer-motion';
-import { PERSONAL_INFO } from '../data/portfolioData';
+import { usePortfolio } from '../context/PortfolioContext';
 
 const FlutterIcon = ({ size = 14, className = '' }) => (
   <svg
@@ -51,6 +51,9 @@ const CODE_LINES = [
 ];
 
 export const Hero = () => {
+  const { portfolioState } = usePortfolio();
+  const { personalInfo: PERSONAL_INFO } = portfolioState;
+
   const scrollTo = (id) => {
     const el = document.getElementById(id);
     if (el) el.scrollIntoView({ behavior: 'smooth' });

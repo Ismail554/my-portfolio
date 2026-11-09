@@ -1,10 +1,13 @@
 // src/components/FeaturedProjects.jsx
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { FEATURED_PROJECTS, OTHER_PROJECTS } from '../data/portfolioData';
+import { usePortfolio } from '../context/PortfolioContext';
 import { CaseStudyModal } from './CaseStudyModal';
 
 export const FeaturedProjects = () => {
+  const { portfolioState } = usePortfolio();
+  const { featuredProjects, otherProjects } = portfolioState;
+
   const [activeFilter, setActiveFilter] = useState('all');
   const [selectedCaseStudy, setSelectedCaseStudy] = useState(null);
   const [expandedCards, setExpandedCards] = useState({});
@@ -16,19 +19,24 @@ export const FeaturedProjects = () => {
     }));
   };
 
+  const allProjectsList = [...featuredProjects, ...otherProjects];
+  const liveCount = allProjectsList.filter((p) => p.category === 'live').length;
+  const clientCount = allProjectsList.filter((p) => p.category === 'client').length;
+  const ossCount = allProjectsList.filter((p) => p.category === 'opensource').length;
+
   const filters = [
-    { id: 'all', label: 'All Projects', count: FEATURED_PROJECTS.length + OTHER_PROJECTS.length },
-    { id: 'live', label: 'Production & Stores', count: 5 },
-    { id: 'client', label: 'Client Solutions', count: 1 },
-    { id: 'opensource', label: 'Architecture & OSS', count: 3 }
+    { id: 'all', label: 'All Projects', count: allProjectsList.length },
+    { id: 'live', label: 'Production & Stores', count: liveCount },
+    { id: 'client', label: 'Client Solutions', count: clientCount },
+    { id: 'opensource', label: 'Architecture & OSS', count: ossCount }
   ];
 
-  const filteredFeatured = FEATURED_PROJECTS.filter((p) => {
+  const filteredFeatured = featuredProjects.filter((p) => {
     if (activeFilter === 'all') return true;
     return p.category === activeFilter;
   });
 
-  const filteredOther = OTHER_PROJECTS.filter((p) => {
+  const filteredOther = otherProjects.filter((p) => {
     if (activeFilter === 'all') return true;
     return p.category === activeFilter;
   });

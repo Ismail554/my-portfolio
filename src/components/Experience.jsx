@@ -1,7 +1,7 @@
 // src/components/Experience.jsx
 import React from 'react';
 import { motion } from 'framer-motion';
-import { EXPERIENCES } from '../data/portfolioData';
+import { usePortfolio } from '../context/PortfolioContext';
 
 const getCompanyIcon = (company) => {
   if (company.includes('Join Venture')) return 'fas fa-users-gear';
@@ -11,6 +11,9 @@ const getCompanyIcon = (company) => {
 };
 
 export const Experience = () => {
+  const { portfolioState } = usePortfolio();
+  const { experiences: EXPERIENCES } = portfolioState;
+
   return (
     <section id="experience" className="experience-section section-padding-compact">
       <div className="container">

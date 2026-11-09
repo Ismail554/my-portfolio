@@ -1,8 +1,11 @@
 // src/components/Navbar.jsx
 import React, { useState, useEffect } from 'react';
-import { PERSONAL_INFO } from '../data/portfolioData';
+import { usePortfolio } from '../context/PortfolioContext';
 
 export const Navbar = ({ activeSection, isDarkMode, toggleTheme }) => {
+  const { portfolioState } = usePortfolio();
+  const { personalInfo: PERSONAL_INFO } = portfolioState;
+
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 

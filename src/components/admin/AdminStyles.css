@@ -1,0 +1,987 @@
+/* src/components/admin/AdminStyles.css */
+
+/* ==========================================================================
+   PORTFOLIO ADMIN DASHBOARD STYLESHEET
+   Clean Obsidian & Indigo Aesthetic • Full Responsive Admin UI
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   1. Admin Login View
+   -------------------------------------------------------------------------- */
+.admin-login-wrapper {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--bg-main, #070b14);
+  position: relative;
+  padding: 1.5rem;
+  overflow: hidden;
+}
+
+.admin-login-glow {
+  position: absolute;
+  width: 500px;
+  height: 500px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(56, 189, 248, 0.15) 0%, transparent 70%);
+  top: -150px;
+  right: -100px;
+  pointer-events: none;
+}
+
+.admin-login-glow-2 {
+  position: absolute;
+  width: 450px;
+  height: 450px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(99, 102, 241, 0.12) 0%, transparent 70%);
+  bottom: -150px;
+  left: -100px;
+  pointer-events: none;
+}
+
+.admin-login-card {
+  width: 100%;
+  max-width: 440px;
+  background: var(--bg-surface, #0e1526);
+  border: 1px solid var(--border-subtle, rgba(255, 255, 255, 0.1));
+  border-radius: var(--radius-lg, 16px);
+  padding: 2.25rem 2rem;
+  box-shadow: 0 20px 48px rgba(0, 0, 0, 0.45);
+  position: relative;
+  z-index: 2;
+  backdrop-filter: blur(16px);
+}
+
+.admin-login-header {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.admin-login-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--flutter-cyan, #38bdf8);
+  background: rgba(56, 189, 248, 0.1);
+  padding: 0.35rem 0.85rem;
+  border-radius: 999px;
+  border: 1px solid rgba(56, 189, 248, 0.2);
+  margin-bottom: 1rem;
+}
+
+.admin-login-title {
+  font-size: 1.65rem;
+  font-weight: 800;
+  color: var(--text-main, #f1f5f9);
+  margin-bottom: 0.5rem;
+}
+
+.admin-login-desc {
+  font-size: 0.875rem;
+  color: var(--text-secondary, #94a3b8);
+}
+
+.admin-login-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.admin-input-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.admin-label {
+  font-size: 0.825rem;
+  font-weight: 600;
+  color: var(--text-secondary, #94a3b8);
+}
+
+.admin-input-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.admin-input-icon {
+  position: absolute;
+  left: 1rem;
+  color: var(--text-muted, #64748b);
+  font-size: 0.9rem;
+  pointer-events: none;
+}
+
+.admin-input {
+  width: 100%;
+  background: var(--bg-input, #0a0f1d);
+  border: 1px solid var(--border-subtle, rgba(255, 255, 255, 0.12));
+  color: var(--text-main, #f1f5f9);
+  padding: 0.75rem 1rem 0.75rem 2.6rem;
+  border-radius: var(--radius-sm, 8px);
+  font-size: 0.9rem;
+  transition: all 0.2s ease;
+}
+
+.admin-input:focus {
+  outline: none;
+  border-color: var(--flutter-cyan, #38bdf8);
+  box-shadow: 0 0 0 3px rgba(56, 189, 248, 0.18);
+}
+
+.admin-toggle-pwd-btn {
+  position: absolute;
+  right: 0.85rem;
+  background: transparent;
+  border: none;
+  color: var(--text-muted, #64748b);
+  cursor: pointer;
+  padding: 0.25rem;
+  font-size: 0.9rem;
+}
+
+.admin-toggle-pwd-btn:hover {
+  color: var(--text-main, #f1f5f9);
+}
+
+.admin-login-error {
+  background: rgba(239, 68, 68, 0.12);
+  border: 1px solid rgba(239, 68, 68, 0.3);
+  color: #f87171;
+  padding: 0.75rem 1rem;
+  border-radius: var(--radius-sm, 8px);
+  font-size: 0.85rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.admin-remember-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 0.825rem;
+  color: var(--text-secondary, #94a3b8);
+}
+
+.admin-checkbox-label {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  cursor: pointer;
+}
+
+.admin-btn-primary {
+  background: linear-gradient(135deg, var(--flutter-blue, #0284c7) 0%, #0369a1 100%);
+  color: #ffffff;
+  border: none;
+  padding: 0.85rem 1.25rem;
+  border-radius: var(--radius-sm, 8px);
+  font-size: 0.925rem;
+  font-weight: 700;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  transition: all 0.2s ease;
+  box-shadow: 0 4px 14px rgba(2, 132, 199, 0.35);
+}
+
+.admin-btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(2, 132, 199, 0.45);
+}
+
+.admin-btn-primary:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.admin-back-link {
+  text-align: center;
+  margin-top: 1.25rem;
+}
+
+.admin-back-btn {
+  background: none;
+  border: none;
+  color: var(--text-secondary, #94a3b8);
+  font-size: 0.85rem;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  transition: color 0.16s ease;
+}
+
+.admin-back-btn:hover {
+  color: var(--flutter-cyan, #38bdf8);
+}
+
+/* --------------------------------------------------------------------------
+   2. Admin Dashboard Layout (Sidebar + Content Shell)
+   -------------------------------------------------------------------------- */
+.admin-dashboard-container {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: var(--bg-main, #070b14);
+  color: var(--text-main, #f1f5f9);
+}
+
+/* Admin Top Bar */
+.admin-navbar {
+  height: 64px;
+  background: var(--bg-surface, #0e1526);
+  border-bottom: 1px solid var(--border-subtle, rgba(255, 255, 255, 0.08));
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 1.5rem;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.admin-nav-brand {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.admin-brand-icon {
+  width: 36px;
+  height: 36px;
+  border-radius: 9px;
+  background: linear-gradient(135deg, var(--flutter-blue, #0284c7) 0%, var(--indigo-accent, #6366f1) 100%);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 800;
+  font-size: 0.95rem;
+}
+
+.admin-brand-title {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--text-main, #f1f5f9);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.admin-badge-live {
+  font-size: 0.68rem;
+  font-weight: 700;
+  background: rgba(16, 185, 129, 0.15);
+  color: #34d399;
+  border: 1px solid rgba(16, 185, 129, 0.3);
+  padding: 0.15rem 0.55rem;
+  border-radius: 999px;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.admin-nav-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+}
+
+.admin-btn-action {
+  background: var(--bg-card, #131c31);
+  border: 1px solid var(--border-subtle, rgba(255, 255, 255, 0.1));
+  color: var(--text-main, #f1f5f9);
+  padding: 0.5rem 0.9rem;
+  border-radius: var(--radius-sm, 8px);
+  font-size: 0.825rem;
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  cursor: pointer;
+  transition: all 0.16s ease;
+  text-decoration: none;
+}
+
+.admin-btn-action:hover {
+  background: var(--bg-card-hover, #18233d);
+  border-color: var(--flutter-cyan, #38bdf8);
+  color: var(--flutter-cyan, #38bdf8);
+}
+
+.admin-btn-logout {
+  background: rgba(239, 68, 68, 0.1);
+  border: 1px solid rgba(239, 68, 68, 0.25);
+  color: #f87171;
+}
+
+.admin-btn-logout:hover {
+  background: rgba(239, 68, 68, 0.2);
+  border-color: #ef4444;
+  color: #fff;
+}
+
+/* Admin Body (Sidebar + Content) */
+.admin-body {
+  display: flex;
+  flex: 1;
+}
+
+/* Sidebar */
+.admin-sidebar {
+  width: 250px;
+  background: var(--bg-surface, #0e1526);
+  border-right: 1px solid var(--border-subtle, rgba(255, 255, 255, 0.08));
+  display: flex;
+  flex-direction: column;
+  flex-shrink: 0;
+  padding: 1.25rem 0.75rem;
+}
+
+.admin-sidebar-nav {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.admin-sidebar-item {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.7rem 1rem;
+  border-radius: var(--radius-sm, 8px);
+  background: transparent;
+  border: none;
+  color: var(--text-secondary, #94a3b8);
+  font-size: 0.875rem;
+  font-weight: 600;
+  text-align: left;
+  cursor: pointer;
+  transition: all 0.16s ease;
+  width: 100%;
+}
+
+.admin-sidebar-item:hover {
+  background: var(--bg-card, #131c31);
+  color: var(--text-main, #f1f5f9);
+}
+
+.admin-sidebar-item.active {
+  background: linear-gradient(90deg, rgba(2, 132, 199, 0.2) 0%, rgba(99, 102, 241, 0.15) 100%);
+  color: var(--flutter-cyan, #38bdf8);
+  border-left: 3px solid var(--flutter-cyan, #38bdf8);
+  font-weight: 700;
+}
+
+.admin-sidebar-item i {
+  font-size: 1rem;
+  width: 20px;
+  text-align: center;
+}
+
+.admin-sidebar-count {
+  margin-left: auto;
+  font-size: 0.75rem;
+  padding: 0.15rem 0.5rem;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.08);
+  color: var(--text-secondary, #94a3b8);
+}
+
+/* Main Content Area */
+.admin-main-content {
+  flex: 1;
+  padding: 2rem;
+  overflow-y: auto;
+  max-width: 1400px;
+}
+
+.admin-content-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 2rem;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.admin-page-title {
+  font-size: 1.65rem;
+  font-weight: 800;
+  color: var(--text-main, #f1f5f9);
+  margin-bottom: 0.25rem;
+}
+
+.admin-page-subtext {
+  font-size: 0.875rem;
+  color: var(--text-secondary, #94a3b8);
+}
+
+/* --------------------------------------------------------------------------
+   3. Overview Tab & Metric Cards
+   -------------------------------------------------------------------------- */
+.admin-metrics-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1.25rem;
+  margin-bottom: 2rem;
+}
+
+.admin-metric-card {
+  background: var(--bg-card, #131c31);
+  border: 1px solid var(--border-subtle, rgba(255, 255, 255, 0.08));
+  border-radius: var(--radius-md, 12px);
+  padding: 1.25rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.admin-metric-icon {
+  width: 48px;
+  height: 48px;
+  border-radius: 12px;
+  background: rgba(56, 189, 248, 0.1);
+  color: var(--flutter-cyan, #38bdf8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.35rem;
+}
+
+.admin-metric-icon.indigo {
+  background: rgba(99, 102, 241, 0.1);
+  color: #818cf8;
+}
+
+.admin-metric-icon.emerald {
+  background: rgba(16, 185, 129, 0.1);
+  color: #34d399;
+}
+
+.admin-metric-icon.amber {
+  background: rgba(245, 158, 11, 0.1);
+  color: #fbbf24;
+}
+
+.admin-metric-value {
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: var(--text-main, #f1f5f9);
+  line-height: 1.1;
+}
+
+.admin-metric-label {
+  font-size: 0.8rem;
+  color: var(--text-secondary, #94a3b8);
+  font-weight: 500;
+}
+
+/* Section Visibility Control Box */
+.admin-panel-card {
+  background: var(--bg-surface, #0e1526);
+  border: 1px solid var(--border-subtle, rgba(255, 255, 255, 0.08));
+  border-radius: var(--radius-md, 12px);
+  padding: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.admin-panel-title {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--text-main, #f1f5f9);
+  margin-bottom: 0.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.admin-panel-desc {
+  font-size: 0.85rem;
+  color: var(--text-secondary, #94a3b8);
+  margin-bottom: 1.25rem;
+}
+
+.admin-switches-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 1rem;
+}
+
+.admin-switch-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: var(--bg-card, #131c31);
+  border: 1px solid var(--border-subtle, rgba(255, 255, 255, 0.08));
+  border-radius: var(--radius-sm, 8px);
+  padding: 0.85rem 1rem;
+}
+
+.admin-switch-info {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+}
+
+.admin-switch-info i {
+  color: var(--flutter-cyan, #38bdf8);
+}
+
+.admin-switch-name {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--text-main, #f1f5f9);
+}
+
+/* Custom CSS Toggle Switch */
+.admin-toggle-switch {
+  position: relative;
+  display: inline-block;
+  width: 44px;
+  height: 24px;
+}
+
+.admin-toggle-switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.admin-slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(255, 255, 255, 0.16);
+  transition: 0.2s;
+  border-radius: 24px;
+}
+
+.admin-slider:before {
+  position: absolute;
+  content: "";
+  height: 18px;
+  width: 18px;
+  left: 3px;
+  bottom: 3px;
+  background-color: white;
+  transition: 0.2s;
+  border-radius: 50%;
+}
+
+input:checked + .admin-slider {
+  background-color: var(--flutter-blue, #0284c7);
+}
+
+input:checked + .admin-slider:before {
+  transform: translateX(20px);
+}
+
+/* --------------------------------------------------------------------------
+   4. Tables & Entity List Items (Projects, Experience, Skills)
+   -------------------------------------------------------------------------- */
+.admin-entity-card {
+  background: var(--bg-card, #131c31);
+  border: 1px solid var(--border-subtle, rgba(255, 255, 255, 0.08));
+  border-radius: var(--radius-md, 12px);
+  padding: 1.25rem;
+  margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.25rem;
+  transition: border-color 0.16s ease, transform 0.16s ease;
+}
+
+.admin-entity-card:hover {
+  border-color: var(--border-hover, rgba(56, 189, 248, 0.3));
+}
+
+.admin-entity-main {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+  flex: 1;
+  min-width: 0;
+}
+
+.admin-entity-thumb {
+  width: 90px;
+  height: 52px;
+  border-radius: 6px;
+  object-fit: cover;
+  background: #000;
+  border: 1px solid var(--border-subtle, rgba(255, 255, 255, 0.1));
+  flex-shrink: 0;
+}
+
+.admin-entity-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.admin-entity-title-row {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  margin-bottom: 0.35rem;
+  flex-wrap: wrap;
+}
+
+.admin-entity-title {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--text-main, #f1f5f9);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.admin-badge-tag {
+  font-size: 0.7rem;
+  font-weight: 700;
+  padding: 0.15rem 0.5rem;
+  border-radius: 999px;
+  background: rgba(56, 189, 248, 0.15);
+  color: var(--flutter-cyan, #38bdf8);
+  border: 1px solid rgba(56, 189, 248, 0.25);
+}
+
+.admin-entity-sub {
+  font-size: 0.85rem;
+  color: var(--text-secondary, #94a3b8);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin-bottom: 0.4rem;
+}
+
+.admin-entity-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+}
+
+.admin-tag-pill {
+  font-size: 0.72rem;
+  padding: 0.15rem 0.45rem;
+  background: rgba(255, 255, 255, 0.06);
+  border-radius: 4px;
+  color: var(--text-muted, #94a3b8);
+}
+
+.admin-entity-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  flex-shrink: 0;
+}
+
+.admin-btn-icon {
+  width: 34px;
+  height: 34px;
+  border-radius: var(--radius-sm, 8px);
+  background: var(--bg-surface, #0e1526);
+  border: 1px solid var(--border-subtle, rgba(255, 255, 255, 0.1));
+  color: var(--text-secondary, #94a3b8);
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.16s ease;
+  font-size: 0.85rem;
+}
+
+.admin-btn-icon:hover {
+  background: var(--bg-card-hover, #18233d);
+  color: var(--flutter-cyan, #38bdf8);
+  border-color: var(--flutter-cyan, #38bdf8);
+}
+
+.admin-btn-icon.delete:hover {
+  background: rgba(239, 68, 68, 0.15);
+  color: #f87171;
+  border-color: #ef4444;
+}
+
+/* --------------------------------------------------------------------------
+   5. Modals & Drawers (Add/Edit Entities)
+   -------------------------------------------------------------------------- */
+.admin-modal-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(7, 11, 20, 0.85);
+  backdrop-filter: blur(8px);
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+}
+
+.admin-modal-container {
+  background: var(--bg-surface, #0e1526);
+  border: 1px solid var(--border-subtle, rgba(255, 255, 255, 0.12));
+  border-radius: var(--radius-lg, 16px);
+  width: 100%;
+  max-width: 780px;
+  max-height: 90vh;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.6);
+  overflow: hidden;
+}
+
+.admin-modal-header {
+  padding: 1.25rem 1.75rem;
+  border-bottom: 1px solid var(--border-subtle, rgba(255, 255, 255, 0.08));
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.admin-modal-title {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--text-main, #f1f5f9);
+}
+
+.admin-modal-close {
+  background: transparent;
+  border: none;
+  color: var(--text-muted, #64748b);
+  font-size: 1.2rem;
+  cursor: pointer;
+  padding: 0.25rem;
+}
+
+.admin-modal-close:hover {
+  color: var(--text-main, #f1f5f9);
+}
+
+.admin-modal-body {
+  padding: 1.5rem 1.75rem;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.admin-modal-footer {
+  padding: 1.25rem 1.75rem;
+  border-top: 1px solid var(--border-subtle, rgba(255, 255, 255, 0.08));
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 0.75rem;
+  background: var(--bg-card, #131c31);
+}
+
+/* Form Layout Helpers */
+.admin-form-grid-2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+.admin-form-grid-3 {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 1rem;
+}
+
+.admin-textarea {
+  width: 100%;
+  background: var(--bg-input, #0a0f1d);
+  border: 1px solid var(--border-subtle, rgba(255, 255, 255, 0.12));
+  color: var(--text-main, #f1f5f9);
+  padding: 0.75rem 1rem;
+  border-radius: var(--radius-sm, 8px);
+  font-size: 0.9rem;
+  font-family: inherit;
+  resize: vertical;
+}
+
+.admin-textarea:focus {
+  outline: none;
+  border-color: var(--flutter-cyan, #38bdf8);
+}
+
+/* Image Selector Block */
+.admin-image-selector {
+  background: var(--bg-card, #131c31);
+  border: 1px solid var(--border-subtle, rgba(255, 255, 255, 0.08));
+  border-radius: var(--radius-sm, 8px);
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.admin-image-preview-box {
+  width: 100%;
+  height: 180px;
+  border-radius: var(--radius-sm, 8px);
+  background: #000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  border: 1px dashed var(--border-subtle, rgba(255, 255, 255, 0.15));
+}
+
+.admin-image-preview-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.admin-preset-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.admin-preset-chip {
+  background: var(--bg-surface, #0e1526);
+  border: 1px solid var(--border-subtle, rgba(255, 255, 255, 0.1));
+  color: var(--text-secondary, #94a3b8);
+  font-size: 0.78rem;
+  padding: 0.3rem 0.65rem;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.16s ease;
+}
+
+.admin-preset-chip:hover,
+.admin-preset-chip.active {
+  border-color: var(--flutter-cyan, #38bdf8);
+  color: var(--flutter-cyan, #38bdf8);
+  background: rgba(56, 189, 248, 0.1);
+}
+
+/* Dynamic List Builder (for features, tech tags, links) */
+.admin-dynamic-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.admin-dynamic-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+/* --------------------------------------------------------------------------
+   6. Export & Code Generator Tab
+   -------------------------------------------------------------------------- */
+.admin-code-box {
+  background: #050811;
+  border: 1px solid var(--border-subtle, rgba(255, 255, 255, 0.1));
+  border-radius: var(--radius-md, 12px);
+  padding: 1.25rem;
+  font-family: 'Fira Code', 'Courier New', monospace;
+  font-size: 0.85rem;
+  color: #38bdf8;
+  max-height: 400px;
+  overflow: auto;
+  white-space: pre;
+}
+
+/* --------------------------------------------------------------------------
+   7. Floating Admin Quick Bar (Public View)
+   -------------------------------------------------------------------------- */
+.admin-floating-bar {
+  position: fixed;
+  bottom: 1.5rem;
+  right: 1.5rem;
+  background: rgba(14, 21, 38, 0.95);
+  border: 1px solid var(--flutter-cyan, #38bdf8);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.5), 0 0 15px rgba(56, 189, 248, 0.3);
+  backdrop-filter: blur(12px);
+  padding: 0.6rem 1rem;
+  border-radius: 999px;
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  z-index: 9999;
+  font-size: 0.825rem;
+  color: var(--text-main, #f1f5f9);
+}
+
+.admin-floating-badge {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-weight: 700;
+  color: var(--flutter-cyan, #38bdf8);
+}
+
+.admin-floating-pulse {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #10b981;
+  box-shadow: 0 0 8px #10b981;
+}
+
+.admin-floating-btn {
+  background: var(--flutter-blue, #0284c7);
+  color: #fff;
+  border: none;
+  padding: 0.35rem 0.75rem;
+  border-radius: 999px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  cursor: pointer;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  transition: transform 0.16s ease;
+}
+
+.admin-floating-btn:hover {
+  transform: scale(1.04);
+}
+
+/* Responsive adjustments */
+@media (max-width: 900px) {
+  .admin-sidebar {
+    width: 70px;
+    padding: 1rem 0.35rem;
+  }
+  .admin-sidebar-item span,
+  .admin-sidebar-count {
+    display: none;
+  }
+  .admin-sidebar-item {
+    justify-content: center;
+    padding: 0.75rem;
+  }
+  .admin-main-content {
+    padding: 1.25rem;
+  }
+  .admin-form-grid-2,
+  .admin-form-grid-3 {
+    grid-template-columns: 1fr;
+  }
+}

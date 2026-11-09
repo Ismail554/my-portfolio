@@ -1,8 +1,11 @@
 // src/components/Footer.jsx
 import React from 'react';
-import { PERSONAL_INFO } from '../data/portfolioData';
+import { usePortfolio } from '../context/PortfolioContext';
 
-export const Footer = () => {
+export const Footer = ({ onNavigateToAdmin }) => {
+  const { portfolioState } = usePortfolio();
+  const { personalInfo: PERSONAL_INFO } = portfolioState;
+
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
@@ -36,6 +39,21 @@ export const Footer = () => {
               <li><a href="#experience">Experience Timeline</a></li>
               <li><a href="#resume">Resume & Education</a></li>
               <li><a href="#contact">Contact Me</a></li>
+              <li>
+                <a
+                  href="/admin"
+                  onClick={(e) => {
+                    if (onNavigateToAdmin) {
+                      e.preventDefault();
+                      onNavigateToAdmin();
+                    }
+                  }}
+                  style={{ color: 'var(--flutter-cyan)', fontWeight: 600 }}
+                >
+                  <i className="fas fa-lock" style={{ fontSize: '0.75rem', marginRight: '4px' }}></i>
+                  Admin Portal
+                </a>
+              </li>
             </ul>
           </div>
 

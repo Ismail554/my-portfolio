@@ -1,8 +1,11 @@
 // src/components/GithubStreak.jsx
 import React, { useState, useEffect } from 'react';
-import { PERSONAL_INFO } from '../data/portfolioData';
+import { usePortfolio } from '../context/PortfolioContext';
 
 export const GithubStreak = () => {
+  const { portfolioState } = usePortfolio();
+  const { personalInfo: PERSONAL_INFO } = portfolioState;
+
   const [data, setData] = useState(null);
   const [stats, setStats] = useState({
     total: 1702,

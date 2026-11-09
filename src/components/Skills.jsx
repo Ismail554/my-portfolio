@@ -1,9 +1,12 @@
 // src/components/Skills.jsx
 import React from 'react';
 import { motion } from 'framer-motion';
-import { SKILL_CATEGORIES } from '../data/portfolioData';
+import { usePortfolio } from '../context/PortfolioContext';
 
 export const Skills = () => {
+  const { portfolioState } = usePortfolio();
+  const { skillCategories: SKILL_CATEGORIES } = portfolioState;
+
   return (
     <section id="skills" className="skills-section section-padding-compact">
       <div className="container">

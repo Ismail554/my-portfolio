@@ -1,9 +1,12 @@
 // src/components/ResumeSection.jsx
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { PERSONAL_INFO, EDUCATION } from '../data/portfolioData';
+import { usePortfolio } from '../context/PortfolioContext';
 
 export const ResumeSection = () => {
+  const { portfolioState } = usePortfolio();
+  const { personalInfo: PERSONAL_INFO, education: EDUCATION } = portfolioState;
+
   const [showPdfViewer, setShowPdfViewer] = useState(false);
 
   return (

@@ -1,10 +1,13 @@
 // src/components/Contact.jsx
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { PERSONAL_INFO } from '../data/portfolioData';
+import { usePortfolio } from '../context/PortfolioContext';
 import { EMAIL_CONFIG } from '../config/emailConfig';
 
 export const Contact = () => {
+  const { portfolioState } = usePortfolio();
+  const { personalInfo: PERSONAL_INFO } = portfolioState;
+
   const [formData, setFormData] = useState({
     name: '',
     email: '',
