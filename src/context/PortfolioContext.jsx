@@ -43,6 +43,12 @@ const DEFAULT_SETTINGS = {
     resume: true,
     about: true,
     contact: true
+  },
+  swarm: {
+    enabled: true,
+    ambientCursors: false,
+    soundEnabled: true,
+    defaultSpeed: 1
   }
 };
 
@@ -380,6 +386,21 @@ export const PortfolioProvider = ({ children }) => {
     }));
   };
 
+  // --- Swarm Cursors Settings & Trigger ---
+  const updateSwarmSettings = (updated) => {
+    setSiteSettings((prev) => ({
+      ...prev,
+      swarm: {
+        ...(prev.swarm || DEFAULT_SETTINGS.swarm),
+        ...updated
+      }
+    }));
+  };
+
+  const triggerSwarmRebuild = () => {
+    window.dispatchEvent(new CustomEvent('ismail-swarm-trigger'));
+  };
+
   // --- Reset to Factory Defaults ---
   const resetToDefaults = () => {
     setPortfolioState({
@@ -510,6 +531,8 @@ export const EDUCATION = ${JSON.stringify(education, null, 2)};
         portfolioState,
         siteSettings,
         toggleSection,
+        updateSwarmSettings,
+        triggerSwarmRebuild,
         // Projects CRUD
         addFeaturedProject,
         updateFeaturedProject,

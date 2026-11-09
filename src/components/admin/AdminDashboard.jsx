@@ -14,6 +14,8 @@ export const AdminDashboard = ({ onNavigateToPortfolio, isDarkMode, toggleTheme 
     portfolioState,
     siteSettings,
     toggleSection,
+    updateSwarmSettings,
+    triggerSwarmRebuild,
     resetToDefaults,
     exportAsJson,
     importFromJson,
@@ -315,6 +317,120 @@ export const AdminDashboard = ({ onNavigateToPortfolio, isDarkMode, toggleTheme 
                       </div>
                     );
                   })}
+                </div>
+              </div>
+
+              {/* Swarm Cursors Rebuild Engine Controls */}
+              <div className="admin-panel-card">
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '0.75rem', marginBottom: '0.75rem' }}>
+                  <div>
+                    <h3 className="admin-panel-title" style={{ margin: 0 }}>
+                      <i className="fas fa-wand-magic-sparkles"></i>
+                      <span>Swarm Cursors Rebuild Engine (DhvanilPatel/swarm-cursors)</span>
+                    </h3>
+                    <p className="admin-panel-desc" style={{ margin: '0.25rem 0 0 0' }}>
+                      Control the multiplayer Figma-style swarm rebuild animation, ambient cursors, Web Audio effects, and speed multiplier.
+                    </p>
+                  </div>
+
+                  <button
+                    type="button"
+                    className="admin-btn-primary"
+                    onClick={() => {
+                      onNavigateToPortfolio();
+                      setTimeout(() => {
+                        triggerSwarmRebuild();
+                      }, 220);
+                    }}
+                  >
+                    <i className="fas fa-play"></i>
+                    <span>Launch Swarm Rebuild Live</span>
+                  </button>
+                </div>
+
+                <div className="admin-switches-grid">
+                  <div className="admin-switch-item">
+                    <div className="admin-switch-info">
+                      <i className="fas fa-wand-magic-sparkles"></i>
+                      <span className="admin-switch-name">Navbar "Swarm Build" Button</span>
+                    </div>
+                    <label className="admin-toggle-switch">
+                      <input
+                        type="checkbox"
+                        checked={siteSettings?.swarm?.enabled !== false}
+                        onChange={() =>
+                          updateSwarmSettings({
+                            enabled: !(siteSettings?.swarm?.enabled !== false)
+                          })
+                        }
+                      />
+                      <span className="admin-slider"></span>
+                    </label>
+                  </div>
+
+                  <div className="admin-switch-item">
+                    <div className="admin-switch-info">
+                      <i className="fas fa-arrow-pointer"></i>
+                      <span className="admin-switch-name">Ambient Multiplayer Cursors</span>
+                    </div>
+                    <label className="admin-toggle-switch">
+                      <input
+                        type="checkbox"
+                        checked={!!siteSettings?.swarm?.ambientCursors}
+                        onChange={() =>
+                          updateSwarmSettings({
+                            ambientCursors: !siteSettings?.swarm?.ambientCursors
+                          })
+                        }
+                      />
+                      <span className="admin-slider"></span>
+                    </label>
+                  </div>
+
+                  <div className="admin-switch-item">
+                    <div className="admin-switch-info">
+                      <i className="fas fa-volume-high"></i>
+                      <span className="admin-switch-name">Web Audio Synth Effects</span>
+                    </div>
+                    <label className="admin-toggle-switch">
+                      <input
+                        type="checkbox"
+                        checked={siteSettings?.swarm?.soundEnabled !== false}
+                        onChange={() =>
+                          updateSwarmSettings({
+                            soundEnabled: !(siteSettings?.swarm?.soundEnabled !== false)
+                          })
+                        }
+                      />
+                      <span className="admin-slider"></span>
+                    </label>
+                  </div>
+
+                  <div className="admin-switch-item">
+                    <div className="admin-switch-info">
+                      <i className="fas fa-gauge-high"></i>
+                      <span className="admin-switch-name">Default Build Speed</span>
+                    </div>
+                    <div style={{ display: 'flex', gap: '0.35rem' }}>
+                      {[1, 2, 3].map((spd) => (
+                        <button
+                          key={spd}
+                          type="button"
+                          className="admin-btn-action"
+                          style={{
+                            padding: '0.2rem 0.55rem',
+                            fontSize: '0.75rem',
+                            ...((siteSettings?.swarm?.defaultSpeed || 1) === spd
+                              ? { background: 'var(--flutter-blue)', color: '#fff', borderColor: 'var(--flutter-blue)' }
+                              : {})
+                          }}
+                          onClick={() => updateSwarmSettings({ defaultSpeed: spd })}
+                        >
+                          {spd}×
+                        </button>
+                      ))}
+                    </div>
+                  </div>
                 </div>
               </div>
 

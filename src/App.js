@@ -15,6 +15,7 @@ import { Experience } from './components/Experience';
 import { ResumeSection } from './components/ResumeSection';
 import { Contact } from './components/Contact';
 import { Footer } from './components/Footer';
+import { SwarmCursors } from './components/SwarmCursors';
 
 import { AdminLogin } from './components/admin/AdminLogin';
 import { AdminDashboard } from './components/admin/AdminDashboard';
@@ -185,6 +186,9 @@ function PortfolioApp() {
 
       {/* Footer */}
       <Footer onNavigateToAdmin={navigateToAdmin} />
+
+      {/* Multiplayer Swarm Cursors Rebuild Engine */}
+      <SwarmCursors />
 
       {/* Floating Admin Quick Bar if logged in */}
       {isAdminLoggedIn && (

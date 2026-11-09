@@ -3,8 +3,9 @@ import React, { useState, useEffect } from 'react';
 import { usePortfolio } from '../context/PortfolioContext';
 
 export const Navbar = ({ activeSection, isDarkMode, toggleTheme }) => {
-  const { portfolioState } = usePortfolio();
+  const { portfolioState, siteSettings, triggerSwarmRebuild } = usePortfolio();
   const { personalInfo: PERSONAL_INFO } = portfolioState;
+  const isSwarmEnabled = siteSettings?.swarm?.enabled !== false;
 
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -71,6 +72,19 @@ export const Navbar = ({ activeSection, isDarkMode, toggleTheme }) => {
 
         {/* Right CTA / Theme Toggle */}
         <div className="navbar-actions">
+          {isSwarmEnabled && (
+            <button
+              type="button"
+              className="navbar-swarm-btn"
+              onClick={triggerSwarmRebuild}
+              title="Watch multiplayer swarm cursors rebuild this page live (Alt+Shift+S)"
+              aria-label="Trigger Swarm Cursors Rebuild Animation"
+            >
+              <i className="fas fa-wand-magic-sparkles"></i>
+              <span>Swarm Build</span>
+            </button>
+          )}
+
           <button
             className="theme-toggle-btn"
             onClick={toggleTheme}

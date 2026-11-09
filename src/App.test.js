@@ -54,6 +54,7 @@ test('renders portfolio landing page with engineer name and sections', () => {
   expect(container.textContent).toContain('Flutter Developer');
   expect(container.textContent).toContain('Featured Applications');
   expect(container.textContent).toContain('Professional Experience');
+  expect(container.textContent).toContain('Swarm Build');
 });
 
 test('navigates to /admin and renders admin login screen', () => {
