@@ -1,169 +1,83 @@
 /* src/components/SwarmCursors.css */
 /* ==========================================================================
-   SWARM CURSORS REBUILD ENGINE (Inspired by DhvanilPatel/swarm-cursors)
-   Figma-Style Multiplayer Swarm • Rulers & Snap Guides • Interactive HUD
+   OPTIMIZED SWARM REBUILD ENGINE (Flicker-Free • 90 FPS Hardware Accelerated)
    ========================================================================== */
 
-/* Non-destructive hide & reveal states on live DOM targets */
-.swarm-hidden-target {
-  opacity: 0 !important;
-  transform: scale(0.97) translateY(4px) !important;
-  transition: none !important;
-  pointer-events: none !important;
-}
-
-.swarm-revealing-target {
-  opacity: 1 !important;
-  transform: scale(1) translateY(0) !important;
-  transition: opacity 0.28s cubic-bezier(0.16, 1, 0.3, 1),
-              transform 0.28s cubic-bezier(0.16, 1, 0.3, 1) !important;
-}
-
-/* Full-Viewport Overlay Canvas (Pointer-events: none so page remains scrollable) */
-.swarm-stage-overlay {
+/* Fullscreen Ambient Blueprint Overlay (Smooth Fade In/Out) */
+.swarm-overlay-backdrop {
   position: fixed;
   inset: 0;
-  z-index: 9990;
+  z-index: 9980;
   pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  background: rgba(7, 11, 20, 0.45);
+  backdrop-filter: blur(2px);
+  -webkit-backdrop-filter: blur(2px);
   overflow: hidden;
   user-select: none;
 }
 
-/* Figma-style subtle dot grid during active rebuild */
-.swarm-stage-overlay.is-rebuilding {
-  background-image: radial-gradient(rgba(56, 189, 248, 0.16) 1px, transparent 1px);
-  background-size: 24px 24px;
+.swarm-overlay-backdrop.active {
+  opacity: 1;
 }
 
-/* Top & Left Design Rulers */
-.swarm-ruler-top {
-  position: fixed;
-  top: 0;
-  left: 24px;
-  right: 0;
-  height: 22px;
-  background: rgba(10, 15, 29, 0.92);
-  border-bottom: 1px solid rgba(56, 189, 248, 0.25);
-  display: flex;
-  align-items: flex-end;
-  z-index: 9992;
-  font-family: 'Fira Code', monospace;
-  font-size: 9px;
-  color: #64748b;
-  backdrop-filter: blur(6px);
-}
-
-.swarm-ruler-left {
-  position: fixed;
-  top: 22px;
-  left: 0;
-  bottom: 0;
-  width: 24px;
-  background: rgba(10, 15, 29, 0.92);
-  border-right: 1px solid rgba(56, 189, 248, 0.25);
-  display: flex;
-  flex-direction: column;
-  z-index: 9992;
-  font-family: 'Fira Code', monospace;
-  font-size: 9px;
-  color: #64748b;
-  backdrop-filter: blur(6px);
-}
-
-.swarm-ruler-corner {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 24px;
-  height: 22px;
-  background: rgba(14, 21, 38, 0.96);
-  border-right: 1px solid rgba(56, 189, 248, 0.25);
-  border-bottom: 1px solid rgba(56, 189, 248, 0.25);
-  z-index: 9993;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: #38bdf8;
-  font-size: 10px;
-}
-
-.swarm-ruler-tick-h {
-  width: 100px;
-  flex-shrink: 0;
-  border-left: 1px solid rgba(148, 163, 184, 0.25);
-  padding-left: 4px;
-  height: 12px;
-  line-height: 12px;
-}
-
-.swarm-ruler-tick-v {
-  height: 100px;
-  flex-shrink: 0;
-  border-top: 1px solid rgba(148, 163, 184, 0.25);
-  padding-top: 2px;
-  text-align: center;
-  writing-mode: vertical-rl;
-}
-
-/* Snap Guides (Cyan / Red-Pink dashed lines) */
-.swarm-snap-guide-h {
-  position: fixed;
-  left: 0;
-  right: 0;
-  height: 1px;
-  border-top: 1px dashed rgba(244, 63, 94, 0.65);
+/* Figma Dot Grid Pattern (Smoothly blended) */
+.swarm-grid-canvas {
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(rgba(56, 189, 248, 0.18) 1px, transparent 1px);
+  background-size: 28px 28px;
   pointer-events: none;
-  z-index: 9991;
-  transition: top 0.12s ease-out, opacity 0.2s ease;
 }
 
-.swarm-snap-guide-v {
-  position: fixed;
-  top: 0;
-  bottom: 0;
-  width: 1px;
-  border-left: 1px dashed rgba(56, 189, 248, 0.65);
-  pointer-events: none;
-  z-index: 9991;
-  transition: left 0.12s ease-out, opacity 0.2s ease;
+/* Subtle pulse highlight on inspected portfolio section (No layout shift) */
+.swarm-section-inspected {
+  outline: 2px solid rgba(56, 189, 248, 0.4) !important;
+  outline-offset: 4px !important;
+  box-shadow: 0 0 24px rgba(56, 189, 248, 0.18) !important;
+  transition: outline-color 0.3s ease, box-shadow 0.3s ease !important;
 }
 
-/* Active Drawing Box / Wireframe Rectangles */
-.swarm-wireframe-box {
+/* Active Figma Wireframe Bounding Box */
+.swarm-active-box {
   position: fixed;
   border: 1.5px solid var(--box-color, #38bdf8);
   background: var(--box-fill, rgba(56, 189, 248, 0.08));
   border-radius: 6px;
   pointer-events: none;
-  z-index: 9993;
-  box-shadow: 0 0 16px var(--box-fill, rgba(56, 189, 248, 0.15));
+  z-index: 9985;
+  box-shadow: 0 0 20px var(--box-fill, rgba(56, 189, 248, 0.15));
+  will-change: transform, width, height, top, left;
+  display: none;
 }
 
-/* Corner Handles on Figma Selection Box */
-.swarm-wireframe-box::before,
-.swarm-wireframe-box::after {
+/* Corner Handles on Selection Box */
+.swarm-active-box::before,
+.swarm-active-box::after {
   content: '';
   position: absolute;
-  width: 6px;
-  height: 6px;
+  width: 7px;
+  height: 7px;
   background: #ffffff;
   border: 1.5px solid var(--box-color, #38bdf8);
+  border-radius: 1px;
 }
 
-.swarm-wireframe-box::before {
+.swarm-active-box::before {
   top: -4px;
   left: -4px;
 }
 
-.swarm-wireframe-box::after {
+.swarm-active-box::after {
   bottom: -4px;
   right: -4px;
 }
 
-/* Dimension Pill under Wireframe Box (e.g. 384 × 220) */
-.swarm-dimension-pill {
+/* Dimension Pill under Active Box */
+.swarm-active-box-pill {
   position: absolute;
-  bottom: -22px;
+  bottom: -24px;
   left: 50%;
   transform: translateX(-50%);
   background: var(--box-color, #38bdf8);
@@ -171,38 +85,38 @@
   font-family: 'Fira Code', monospace;
   font-size: 10px;
   font-weight: 700;
-  padding: 1px 6px;
+  padding: 2px 7px;
   border-radius: 4px;
   white-space: nowrap;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.35);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
 }
 
-/* Typing Preview Bubble / Caret */
-.swarm-typing-ghost {
+/* Floating Typing Ghost Tooltip */
+.swarm-active-typing {
   position: fixed;
   pointer-events: none;
-  z-index: 9993;
-  background: rgba(14, 21, 38, 0.92);
+  z-index: 9986;
+  background: rgba(14, 21, 38, 0.95);
   border: 1px solid var(--box-color, #38bdf8);
   border-radius: 6px;
   padding: 4px 10px;
-  font-size: 12px;
+  font-size: 11.5px;
   font-weight: 600;
   color: #f1f5f9;
-  display: inline-flex;
+  display: none;
   align-items: center;
-  gap: 4px;
-  max-width: 340px;
+  gap: 5px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
+  max-width: 380px;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
 }
 
-.swarm-typing-caret {
+.swarm-active-caret {
   display: inline-block;
   width: 2px;
-  height: 14px;
+  height: 13px;
   background: var(--box-color, #38bdf8);
   animation: swarmBlink 0.5s infinite alternate;
 }
@@ -212,15 +126,15 @@
   100% { opacity: 0.15; }
 }
 
-/* Multiplayer Cursor Item */
+/* Multiplayer Cursor Agent Item (GPU accelerated with translate3d) */
 .swarm-cursor-agent {
   position: fixed;
   top: 0;
   left: 0;
   pointer-events: none;
-  z-index: 9995;
+  z-index: 9990;
   will-change: transform;
-  transition: transform 0.04s linear;
+  display: none;
 }
 
 .swarm-cursor-svg {
@@ -228,37 +142,9 @@
   display: block;
 }
 
-.swarm-cursor-crosshair {
-  width: 18px;
-  height: 18px;
-  position: relative;
-  transform: translate(-9px, -9px);
-}
-
-.swarm-cursor-crosshair::before,
-.swarm-cursor-crosshair::after {
-  content: '';
-  position: absolute;
-  background: var(--cursor-color, #38bdf8);
-}
-
-.swarm-cursor-crosshair::before {
-  top: 8px;
-  left: 0;
-  right: 0;
-  height: 2px;
-}
-
-.swarm-cursor-crosshair::after {
-  left: 8px;
-  top: 0;
-  bottom: 0;
-  width: 2px;
-}
-
 .swarm-cursor-nametag {
   position: absolute;
-  top: 16px;
+  top: 15px;
   left: 12px;
   background: var(--cursor-color, #38bdf8);
   color: #ffffff;
@@ -271,7 +157,6 @@
   display: flex;
   align-items: center;
   gap: 5px;
-  letter-spacing: 0.01em;
 }
 
 .swarm-cursor-task-badge {
@@ -283,9 +168,7 @@
   font-family: 'Fira Code', monospace;
 }
 
-/* --------------------------------------------------------------------------
-   Interactive Floating HUD Bar (Top-Center during Swarm Rebuild)
-   -------------------------------------------------------------------------- */
+/* Interactive Floating HUD Bar (Flicker-Free, smoothly placed) */
 .swarm-hud-bar {
   position: fixed;
   bottom: 1.5rem;
@@ -301,11 +184,24 @@
   gap: 0.75rem;
   box-shadow: 0 16px 40px rgba(0, 0, 0, 0.6), 0 0 20px rgba(56, 189, 248, 0.2);
   backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
   pointer-events: auto;
   color: #f1f5f9;
   font-size: 0.82rem;
   flex-wrap: wrap;
   justify-content: center;
+  animation: swarmHudSlideUp 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes swarmHudSlideUp {
+  from {
+    opacity: 0;
+    transform: translate(-50%, 16px);
+  }
+  to {
+    opacity: 1;
+    transform: translate(-50%, 0);
+  }
 }
 
 .swarm-hud-status {
@@ -328,7 +224,8 @@
   height: 100%;
   background: linear-gradient(90deg, #38bdf8, #6366f1, #10b981);
   border-radius: 999px;
-  transition: width 0.15s ease-out;
+  width: 0%;
+  transition: width 0.12s linear;
 }
 
 .swarm-hud-divider {
@@ -375,7 +272,7 @@
   color: #ffffff;
 }
 
-/* Navbar Swarm Trigger Button */
+/* Navbar Trigger Button */
 .navbar-swarm-btn {
   display: inline-flex;
   align-items: center;
@@ -411,11 +308,6 @@
     border-radius: 14px;
     padding: 0.5rem 0.75rem;
     gap: 0.45rem;
-  }
-  .swarm-ruler-top,
-  .swarm-ruler-left,
-  .swarm-ruler-corner {
-    display: none;
   }
   .navbar-swarm-btn span {
     display: none;

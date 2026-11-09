@@ -45,12 +45,11 @@ const DEFAULT_SETTINGS = {
     contact: true
   },
   swarm: {
-    enabled: true,
-    autoPlay: true,
-    autoPlayFrequency: 'always', // 'always' | 'session'
-    ambientCursors: false,
+    enabled: true, // Master Switch: Swarm Build Feature ON / OFF
+    autoPlay: false, // Auto-Play on page load (can be enabled in Admin)
+    autoPlayFrequency: 'session', // 'always' | 'session'
     soundEnabled: true,
-    defaultSpeed: 1
+    defaultSpeed: 2
   }
 };
 
