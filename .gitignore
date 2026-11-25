@@ -9,7 +9,10 @@
 /coverage
 
 # production
-/build
+/build/*
+!/build/resume/
+/build/resume/*
+!/build/resume/ismail-resume.pdf
 
 # misc
 .DS_Store
